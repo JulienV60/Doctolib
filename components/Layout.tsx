@@ -2,7 +2,7 @@ import Head from "next/head";
 import React from "react";
 import Link from "next/link";
 
-const Layout: React.FC = ({ children }) => {
+const Layout: React.FC = ({ children }: any) => {
   return (
     <>
       <Head>
