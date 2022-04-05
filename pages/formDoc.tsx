@@ -1,5 +1,6 @@
 import Layout from "../components/Layout";
 import React, { useState } from "react";
+import Link from "next/link";
 
 export default function formDoc() {
   return (
@@ -42,6 +43,12 @@ export default function formDoc() {
             <a> Send</a>
           </button>
         </form>
+        <button>
+          <Link href="./addAvailability">Add Availability</Link>
+        </button>
+        <button>
+          <Link href="./myAgenda">My Agenda</Link>
+        </button>
       </div>
     </Layout>
   );
