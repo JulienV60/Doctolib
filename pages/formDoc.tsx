@@ -36,7 +36,7 @@ export default function formDoc() {
             placeholder="Speciality"
           ></input>
 
-          <button type="submit" onClick={updateDbDoc} id="test2">
+          <button type="submit" id="test2">
             <a> Send</a>
           </button>
         </form>

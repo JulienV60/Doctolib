@@ -43,10 +43,8 @@ export default async function handler(
   ).then((data) => data.json());
   const patientMail = patientsInfo.name;
   const setDbPatient = {
-    tokenAccessPatient: tokenAccess,
     firstName: "",
     lastName: "",
-
     email: patientMail,
   };
   const mongoDb = await getDatabase();

@@ -41,7 +41,6 @@ export default async function handler(
   }).then((data) => data.json());
   const docMail = docInfo.name;
   const setDbDoc = {
-    tokenAccessDoc: tokenAccessDoc,
     firstName: "",
     lastName: "",
     email: docMail,
