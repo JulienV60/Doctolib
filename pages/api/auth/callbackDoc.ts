@@ -10,7 +10,7 @@ export default async function handler(
   const auth0 = await fetch(`${process.env.AUTH0_TOKEN}`, {
     method: "POST",
     headers: { "Content-type": "application/x-www-form-urlencoded" },
-    body: `grant_type=authorization_code&client_id=${process.env.AUTH0_CLIENT_ID}&client_secret=${process.env.AUTH0_CLIENT_SECRET}&code=${queryCode}&redirect_uri=http://localhost:3000/`,
+    body: `grant_type=authorization_code&client_id=${process.env.AUTH0_CLIENT_ID}&client_secret=${process.env.AUTH0_CLIENT_SECRET}&code=${queryCode}&redirect_uri=${process.env.AUTH0_LOCAL}`,
   })
     .then((data) => data.json())
     .then((token) => token);
