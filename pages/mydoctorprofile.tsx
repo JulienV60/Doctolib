@@ -6,7 +6,7 @@ function App() {
     <Layout>
       <div className="App">
         <hr className="k-my-8" />
-        hello
+
         <BookDrivingSlot />
       </div>
     </Layout>
