@@ -39,7 +39,7 @@ export default async function handler(
       Authorization: `Bearer ${tokenAccessDoc}`,
     },
   }).then((data) => data.json());
-  const docMail = docInfo.name;
+  const docMail = docInfo.nickname;
   const setDbDoc = {
     firstName: "",
     lastName: "",

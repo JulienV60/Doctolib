@@ -2,12 +2,13 @@ import React from "react";
 import Layout from "../components/Layout";
 import Link from "next/link";
 import { getDatabase } from "../src/database";
-
+import Calendar from "react-calendar";
 export default function formDoc() {
   return (
     <Layout>
       <div>
         <form>
+          <Calendar />
           <input
             className=".form-control"
             id="first-name"
