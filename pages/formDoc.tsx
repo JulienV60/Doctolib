@@ -1,8 +1,9 @@
-import React from "react";
 import Layout from "../components/Layout";
-import Link from "next/link";
-import { getDatabase } from "../src/database";
-import Calendar from "react-calendar";
+import React, { useState } from "react";
+import "react-datepicker/dist/react-datepicker.css";
+import "react-datepicker/dist/react-datepicker-cssmodules.css";
+import { MyApp } from "../components/Calendar";
+
 export default function formDoc() {
   return (
     <Layout>
@@ -44,6 +45,7 @@ export default function formDoc() {
             <a> Send</a>
           </button>
         </form>
+        <MyApp />
       </div>
     </Layout>
   );
