@@ -8,7 +8,6 @@ export default function formDoc() {
     <Layout>
       <div>
         <form>
-          <Calendar />
           <input
             className=".form-control"
             id="first-name"
