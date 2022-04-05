@@ -1,13 +1,15 @@
-import BookDrivingSlot from "../components/calendar/Slots_availables";
-44;
 import "@progress/kendo-theme-default/dist/all.css";
 
+import BookDrivingSlot from "../components/calendar/Slots_availables";
+import Layout from "../components/Layout";
 function App() {
   return (
-    <div className="App">
-      <hr className="k-my-8" />
-      <BookDrivingSlot />
-    </div>
+    <Layout>
+      <div className="App">
+        <hr className="k-my-8" />
+        <BookDrivingSlot />
+      </div>
+    </Layout>
   );
 }
 

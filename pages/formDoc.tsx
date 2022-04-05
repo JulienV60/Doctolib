@@ -5,7 +5,7 @@ export default function formDoc() {
   return (
     <Layout>
       <div>
-        <form method="POST" action="/api/mongodb/updateDoc">
+        <form method="POST" action="/api/mongodb/addDoc">
           <input
             className=".form-control"
             id="firstName"
