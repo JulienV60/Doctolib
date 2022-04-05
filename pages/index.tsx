@@ -3,169 +3,53 @@ import Layout from "../components/Layout";
 import { GetServerSideProps } from "next";
 import { getDatabase } from "../src/database";
 
-export const getServerSideProps: GetServerSideProps = async () => {
-  const mongodb = await getDatabase();
+// export const getServerSideProps: GetServerSideProps = async () => {
+//   const mongodb = await getDatabase();
 
-  const test = await mongodb.db().collection("Doctors").find().toArray();
-  const martin = { firsname: "Martin", lastname: "V" };
-  const newDoctor = await mongodb
-    .db()
-    .collection("Doctors")
-    .updateOne(
-      { firsname: "Martin" },
-      {
-        $set: {
-          email: "julienkevin@gmail.com",
-          access_token: "fesfdsfsdf",
-          city: "",
-          speciality: "",
-          slots: {
-            Lundi11: {
-              slot1: {
-                available: false,
-                clientId: "",
-              },
-              slot2: {
-                available: false,
-                clientId: "",
-              },
-              slot3: {
-                available: false,
-                clientId: "",
-              },
-              slot4: {
-                available: false,
-                clientId: "",
-              },
-              slot5: {
-                available: false,
-                clientId: "",
-              },
-            },
-            Mardi12: {
-              slot1: {
-                available: false,
-                clientId: "",
-              },
-              slot2: {
-                available: false,
-                clientId: "",
-              },
-              slot3: {
-                available: false,
-                clientId: "",
-              },
-              slot4: {
-                available: false,
-                clientId: "",
-              },
-              slot5: {
-                available: false,
-                clientId: "",
-              },
-            },
-            Mercredi13: {
-              slot1: {
-                available: false,
-                clientId: "",
-              },
-              slot2: {
-                available: false,
-                clientId: "",
-              },
-              slot3: {
-                available: false,
-                clientId: "",
-              },
-              slot4: {
-                available: false,
-                clientId: "",
-              },
-              slot5: {
-                available: false,
-                clientId: "",
-              },
-            },
-            Jeudi14: {
-              slot1: {
-                available: false,
-                clientId: "",
-              },
-              slot2: {
-                available: false,
-                clientId: "",
-              },
-              slot3: {
-                available: false,
-                clientId: "",
-              },
-              slot4: {
-                available: false,
-                clientId: "",
-              },
-              slot5: {
-                available: false,
-                clientId: "",
-              },
-            },
-            Vendredi15: {
-              slot1: {
-                available: false,
-                clientId: "",
-              },
-              slot2: {
-                available: false,
-                clientId: "",
-              },
-              slot3: {
-                available: false,
-                clientId: "",
-              },
-              slot4: {
-                available: false,
-                clientId: "",
-              },
-              slot5: {
-                available: false,
-                clientId: "",
-              },
-            },
-          },
-        },
-      }
-    );
+//   const test = await mongodb.db().collection("Doctors").find().toArray();
 
-  // function addNewDoctor(db: Db) {
-  //   db.collection("Doctors").updateOne(
-  //     { _id: "2525" },
-  //     { $set: { email: "JulienKevin@gamil.com" } }
-  //   );
-  // }
-  // addNewDoctor();
+// function addNewDoctor(db: Db) {
+//   db.collection("Doctors").updateOne(
+//     { _id: "2525" },
+//     { $set: { email: "JulienKevin@gamil.com" } }
+//   );
+// }
+// addNewDoctor();
 
-  return {
-    props: {
-      data: JSON.stringify(test),
-    },
-  };
-};
+//   return {
+//     props: {
+//       data:,
+//     },
+//   };
+// };
 
-const Home: NextPage = ({ data }: any) => {
-  const test = JSON.parse(data);
-
+const Home: NextPage = () => {
   return (
     <div>
       <Layout>
-        <form className="form-inline" action="POST">
-          <input
-            className="form-control mr-sm-2"
-            type="search"
-            placeholder="Search"
-            aria-label="Search"
-          />
-        </form>
+        <div>
+          <form method="POST" action="/api/mongodb/checkDoc">
+            <input
+              className=".form-control"
+              id="speciality"
+              type="text"
+              placeholder="What speciality are you looking for ?"
+              name="speciality"
+            ></input>
 
-        <form className="form-inline" action="#"></form>
+            <input
+              className=".form-control"
+              id="city"
+              type="text"
+              placeholder="Where ?"
+              name="city"
+            ></input>
+
+            <button type="submit" id="test2">
+              <a>Search</a>
+            </button>
+          </form>
+        </div>
       </Layout>
     </div>
   );
