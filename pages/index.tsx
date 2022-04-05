@@ -136,8 +136,6 @@ export const getServerSideProps: GetServerSideProps = async () => {
       }
     );
 
-  console.log("newDoctor", newDoctor);
-
   // function addNewDoctor(db: Db) {
   //   db.collection("Doctors").updateOne(
   //     { _id: "2525" },
