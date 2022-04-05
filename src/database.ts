@@ -1,5 +1,4 @@
 import { MongoClient } from "mongodb";
-import React from "react";
 const MONGO_URL = process.env.MONGO_DATABASE_URL || "";
 
 let cachedDb: MongoClient;

@@ -1,13 +1,12 @@
 import type { NextPage } from "next";
 
-import styles from "../styles/Home.module.css";
 import Layout from "../components/Layout";
 import { GetServerSideProps } from "next";
 import { getDatabase } from "../src/database";
-import { Db } from "mongodb";
-import { randomBytes } from "crypto";
+
 export const getServerSideProps: GetServerSideProps = async () => {
   const mongodb = await getDatabase();
+
   const test = await mongodb.db().collection("Doctors").find().toArray();
   const martin = { firsname: "Martin", lastname: "V" };
   const newDoctor = await mongodb
@@ -153,9 +152,10 @@ export const getServerSideProps: GetServerSideProps = async () => {
     },
   };
 };
+
 const Home: NextPage = ({ data }: any) => {
   const test = JSON.parse(data);
-  console.log("line 18", test);
+
   return (
     <div>
       <Layout>
@@ -168,7 +168,7 @@ const Home: NextPage = ({ data }: any) => {
           />
         </form>
 
-        <form className="form-inline" action="/api/auth/login"></form>
+        <form className="form-inline" action="#"></form>
       </Layout>
     </div>
   );

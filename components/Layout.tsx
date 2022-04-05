@@ -3,6 +3,18 @@ import React from "react";
 import Link from "next/link";
 
 const Layout: React.FC = ({ children }: any) => {
+  const [cookiePatient, setCookie] = React.useState<any>("");
+  React.useEffect(() => {
+    async function fetchApi() {
+      let response = await fetch(`/api/cookie`);
+      response = await response.json().then((data) => data.cookie.AccessToken);
+
+      setCookie(response);
+    }
+
+    fetchApi();
+  }, []);
+
   return (
     <>
       <Head>
@@ -46,21 +58,32 @@ const Layout: React.FC = ({ children }: any) => {
               className="collapse navbar-collapse"
               id="navbarSupportedContent"
             ></div>
-            <Link href="">
+            {!cookiePatient ? (
+              <Link href="/api/auth/login" passHref={true}>
+                <button
+                  className="btn btn-outline-dark my-2 my-sm-0"
+                  type="submit"
+                >
+                  <a>Login as Patient</a>
+                </button>
+              </Link>
+            ) : (
+              <Link href="/api/auth/logout" passHref={true}>
+                <button
+                  className="btn btn-outline-dark my-2 my-sm-0"
+                  type="submit"
+                >
+                  <a>Logout</a>
+                </button>
+              </Link>
+            )}
+            <Link href="/api/auth/loginDoc" key={"idDoc"} passHref={true}>
               <button
                 className="btn btn-outline-dark my-2 my-sm-0"
                 type="submit"
+                id="LogDoc"
               >
-                <a>Login</a>
-              </button>
-            </Link>
-
-            <Link href="">
-              <button
-                className="btn btn-outline-dark my-2 my-sm-0"
-                type="submit"
-              >
-                <a>Logout</a>
+                <a>Are you a Doctor ? </a>
               </button>
             </Link>
           </div>
