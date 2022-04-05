@@ -11,7 +11,7 @@ const times = [
   "17:00 - 18:00",
 ];
 
-const BookDrivingSlot = (props: any) => {
+const BookDrivingSlot = (props) => {
   const [bookingDate, setBookingDate] = useState(null);
   const [selectedTimeSlot, setSelectedTimeSlot] = useState(null);
   const [bookingTimes, setBookingTimes] = useState([]);
@@ -22,12 +22,14 @@ const BookDrivingSlot = (props: any) => {
     if (!bookingDate) return;
 
     // Get time slots from cache
-    let newBookingTimes = timeSlotCacheRef.current.get(bookingDate);
+    let newBookingTimes = timeSlotCacheRef.current.get(
+      bookingDate.toDateString()
+    );
 
     setBookingTimes(newBookingTimes);
   }, [bookingDate]);
 
-  const onDateChange = (e: any) => {
+  const onDateChange = (e) => {
     setSelectedTimeSlot(null);
     setBookingDate(e.value);
   };
@@ -44,7 +46,7 @@ const BookDrivingSlot = (props: any) => {
               <button
                 key={time}
                 className="k-button k-mb-4"
-                onClick={(e: any) => setSelectedTimeSlot(e.time)}
+                onClick={(e) => setSelectedTimeSlot(time)}
               >
                 {time}
               </button>
@@ -55,10 +57,10 @@ const BookDrivingSlot = (props: any) => {
 
       {bookingDate && selectedTimeSlot ? (
         <div>
-          Selected slot: {bookingDate} at {selectedTimeSlot}
+          Selected slot: {bookingDate.toDateString()} at {selectedTimeSlot}
           <form
             method="POST"
-            action={`/api/mongodb/updateDoc?date=${bookingDate}&time=${selectedTimeSlot}`}
+            action={`/api/mongodb/updateSlotDoc?date=${bookingDate.toDateString()}&time=${selectedTimeSlot}`}
           >
             <button>Confirm ur slot</button>
           </form>
