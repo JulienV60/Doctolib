@@ -5,7 +5,7 @@ import { cp } from "fs/promises";
 
 const Layout: React.FC = ({ children }: any) => {
   const [cookiePatient, setCookie] = React.useState<any>("");
-  console.log(cookiePatient);
+
   React.useEffect(() => {
     async function fetchApi() {
       let response = await fetch(`/api/cookie`);
