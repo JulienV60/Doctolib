@@ -5,7 +5,6 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  console.log(req.body);
   const queryCode = req.query.code;
 
   const auth0 = await fetch(`${process.env.AUTH0_TOKEN}`, {
@@ -18,14 +17,14 @@ export default async function handler(
   const tokenAccessDoc = auth0.access_token;
   const tokenIdDoc = auth0.id_token;
   res.setHeader("Set-Cookie", [
-    cookie.serialize("AccessToken", tokenAccessDoc, {
+    cookie.serialize("AccessTokenDoc", tokenAccessDoc, {
       httpOnly: true,
       secure: process.env.NODE_ENV !== "development",
       maxAge: 60 * 60,
       sameSite: "strict",
       path: "/",
     }),
-    cookie.serialize("IdToken", tokenIdDoc, {
+    cookie.serialize("IdTokenDoc", tokenIdDoc, {
       httpOnly: true,
       secure: process.env.NODE_ENV !== "development",
       maxAge: 60 * 60,
@@ -33,22 +32,6 @@ export default async function handler(
       path: "/",
     }),
   ]);
-  const docInfo = await fetch(`https://${process.env.AUTH0_DOMAIN}/userinfo`, {
-    method: "Post",
-    headers: {
-      Authorization: `Bearer ${tokenAccessDoc}`,
-    },
-  }).then((data) => data.json());
-  const docMail = docInfo.nickname;
-  const setDbDoc = {
-    firstName: "",
-    lastName: "",
-    email: docMail,
-  };
-  const mongoDb = await getDatabase();
-  const setDbPatientInfo = await mongoDb
-    .db()
-    .collection("Doctors")
-    .insertOne(setDbDoc);
+
   res.redirect("/formDoc");
 }

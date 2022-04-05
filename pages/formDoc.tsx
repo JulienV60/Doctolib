@@ -8,7 +8,6 @@ export default function formDoc() {
     <Layout>
       <div>
         <form>
-          <Calendar />
           <input
             className=".form-control"
             id="first-name"
@@ -36,10 +35,11 @@ export default function formDoc() {
             type="text"
             placeholder="Speciality"
           ></input>
-
-          <button type="submit" id="test2">
-            <a> Send</a>
-          </button>
+          <Link href="/mongodb/updateDoc" passHref={true}>
+            <button type="submit" id="test2">
+              <a> Send</a>
+            </button>
+          </Link>
         </form>
       </div>
     </Layout>
