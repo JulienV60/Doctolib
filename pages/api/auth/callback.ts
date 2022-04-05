@@ -41,7 +41,7 @@ export default async function handler(
       },
     }
   ).then((data) => data.json());
-  const patientMail = patientsInfo.name;
+  const patientMail = patientsInfo.nickname;
   const setDbPatient = {
     firstName: "",
     lastName: "",
