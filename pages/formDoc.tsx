@@ -1,8 +1,6 @@
-import React from "react";
 import Layout from "../components/Layout";
-import Link from "next/link";
-import { getDatabase } from "../src/database";
-import Calendar from "react-calendar";
+import React, { useState } from "react";
+
 export default function formDoc() {
   return (
     <Layout>

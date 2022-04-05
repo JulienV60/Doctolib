@@ -7,6 +7,8 @@ export default async function handler(
   res: NextApiResponse
 ) {
   if (req.method === "GET" || "POST") {
+    const test = req.query;
+    console.log(test);
     const cookies = { cookie: getCookies({ req, res }) };
     const AccessTokenDoc = cookies.cookie.AccessTokenDoc;
 
@@ -19,6 +21,8 @@ export default async function handler(
         },
       }
     ).then((data) => data.json());
+    const date = req.query.date;
+    const time = req.query.time;
     const mailUserAuth0 = auth0searchUser.name;
     const mongodb = await getDatabase();
     const newDoctor = {
@@ -28,116 +32,9 @@ export default async function handler(
       city: req.body.city,
       speciality: req.body.speciality,
       slots: {
-        Lundi11: {
-          slot1: {
-            available: false,
-            clientId: "",
-          },
-          slot2: {
-            available: false,
-            clientId: "",
-          },
-          slot3: {
-            available: false,
-            clientId: "",
-          },
-          slot4: {
-            available: false,
-            clientId: "",
-          },
-          slot5: {
-            available: false,
-            clientId: "",
-          },
-        },
-        Mardi12: {
-          slot1: {
-            available: false,
-            clientId: "",
-          },
-          slot2: {
-            available: false,
-            clientId: "",
-          },
-          slot3: {
-            available: false,
-            clientId: "",
-          },
-          slot4: {
-            available: false,
-            clientId: "",
-          },
-          slot5: {
-            available: false,
-            clientId: "",
-          },
-        },
-        Mercredi13: {
-          slot1: {
-            available: false,
-            clientId: "",
-          },
-          slot2: {
-            available: false,
-            clientId: "",
-          },
-          slot3: {
-            available: false,
-            clientId: "",
-          },
-          slot4: {
-            available: false,
-            clientId: "",
-          },
-          slot5: {
-            available: false,
-            clientId: "",
-          },
-        },
-        Jeudi14: {
-          slot1: {
-            available: false,
-            clientId: "",
-          },
-          slot2: {
-            available: false,
-            clientId: "",
-          },
-          slot3: {
-            available: false,
-            clientId: "",
-          },
-          slot4: {
-            available: false,
-            clientId: "",
-          },
-          slot5: {
-            available: false,
-            clientId: "",
-          },
-        },
-        Vendredi15: {
-          slot1: {
-            available: false,
-            clientId: "",
-          },
-          slot2: {
-            available: false,
-            clientId: "",
-          },
-          slot3: {
-            available: false,
-            clientId: "",
-          },
-          slot4: {
-            available: false,
-            clientId: "",
-          },
-          slot5: {
-            available: false,
-            clientId: "",
-          },
-        },
+        date: date,
+        time: time,
+        available: true,
       },
     };
     const addDoctor = await mongodb
