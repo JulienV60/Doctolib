@@ -1,5 +1,4 @@
 import type { NextPage } from "next";
-
 import Layout from "../components/Layout";
 import { GetServerSideProps } from "next";
 import { getDatabase } from "../src/database";
@@ -135,8 +134,6 @@ export const getServerSideProps: GetServerSideProps = async () => {
         },
       }
     );
-
-  console.log("newDoctor", newDoctor);
 
   // function addNewDoctor(db: Db) {
   //   db.collection("Doctors").updateOne(

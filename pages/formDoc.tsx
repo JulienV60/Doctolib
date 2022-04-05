@@ -7,27 +7,29 @@ export default function formDoc() {
   return (
     <Layout>
       <div>
-        <form>
-          <Calendar />
+        <form method="POST" action="/api/mongodb/updateDoc">
           <input
             className=".form-control"
-            id="first-name"
+            id="firstName"
             type="text"
             placeholder="First Name"
+            name="firstName"
           ></input>
 
           <input
             className=".form-control"
-            id="last-name"
+            id="lastName"
             type="text"
             placeholder="Last Name"
+            name="lastName"
           ></input>
 
           <input
             className=".form-control"
-            id="email"
+            id="city"
             type="text"
-            placeholder="City"
+            placeholder="city"
+            name="city"
           ></input>
 
           <input
@@ -35,6 +37,7 @@ export default function formDoc() {
             id="speciality"
             type="text"
             placeholder="Speciality"
+            name="speciality"
           ></input>
 
           <button type="submit" id="test2">

@@ -17,14 +17,14 @@ export default async function handler(
   const tokenAccess = auth0.access_token;
   const tokenId = auth0.id_token;
   res.setHeader("Set-Cookie", [
-    cookie.serialize("AccessToken", tokenAccess, {
+    cookie.serialize("AccessTokenPatient", tokenAccess, {
       httpOnly: true,
       secure: process.env.NODE_ENV !== "development",
       maxAge: 60 * 60,
       sameSite: "strict",
       path: "/",
     }),
-    cookie.serialize("IdToken", tokenId, {
+    cookie.serialize("IdTokenPatient", tokenId, {
       httpOnly: true,
       secure: process.env.NODE_ENV !== "development",
       maxAge: 60 * 60,
@@ -32,25 +32,6 @@ export default async function handler(
       path: "/",
     }),
   ]);
-  const patientsInfo = await fetch(
-    `https://${process.env.AUTH0_DOMAIN}/userinfo`,
-    {
-      method: "Post",
-      headers: {
-        Authorization: `Bearer ${tokenAccess}`,
-      },
-    }
-  ).then((data) => data.json());
-  const patientMail = patientsInfo.nickname;
-  const setDbPatient = {
-    firstName: "",
-    lastName: "",
-    email: patientMail,
-  };
-  const mongoDb = await getDatabase();
-  const setDbPatientInfo = await mongoDb
-    .db()
-    .collection("Patients")
-    .insertOne(setDbPatient);
+
   res.redirect("/");
 }

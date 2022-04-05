@@ -1,13 +1,17 @@
 import Head from "next/head";
 import React from "react";
 import Link from "next/link";
+import { cp } from "fs/promises";
 
 const Layout: React.FC = ({ children }: any) => {
   const [cookiePatient, setCookie] = React.useState<any>("");
+
   React.useEffect(() => {
     async function fetchApi() {
       let response = await fetch(`/api/cookie`);
-      response = await response.json().then((data) => data.cookie.AccessToken);
+      response = await response
+        .json()
+        .then((data) => data.cookie.AccessTokenPatient);
 
       setCookie(response);
     }
