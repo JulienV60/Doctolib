@@ -26,27 +26,31 @@ export default async function handler(
     ).then((data) => data.json());
 
     const mailUserAuth0 = auth0searchUser.email;
-
     const searchIfAlreadyhere = await mongodb
       .db()
       .collection("Doctors")
       .findOne({ email: mailUserAuth0 });
-    const idunique = uuidv4();
-    const updateSlotDoc = await mongodb
-      .db()
-      .collection("Doctors")
-      .updateOne(
-        { email: mailUserAuth0 },
-        {
-          $push: {
-            Slot: {
-              id: new ObjectId(),
-              date: date,
-              time: time,
+    if (searchIfAlreadyhere !== null) {
+      const idunique = uuidv4();
+      const updateSlotDoc = await mongodb
+        .db()
+        .collection("Doctors")
+        .updateOne(
+          { email: mailUserAuth0 },
+          {
+            $push: {
+              Slot: {
+                id: new ObjectId(),
+                date: date,
+                time: time,
+                available: true,
+              },
             },
-          },
-        }
-      );
+          }
+        );
+    } else {
+      res.status(200).redirect("/api/auth/loginDoc");
+    }
   } else {
     res.statusCode = 405;
     res.end();

@@ -43,12 +43,16 @@ export default function formDoc() {
             <a> Send</a>
           </button>
         </form>
-        <button>
-          <Link href="./addAvailability">Add Availability</Link>
-        </button>
-        <button>
-          <Link href="./myAgenda">My Agenda</Link>
-        </button>
+        <Link href="/DocAddingSlot" passHref={true}>
+          <button>
+            <a>Add Availability</a>
+          </button>
+        </Link>
+        <Link href="/DocPlanning" passHref={true}>
+          <button>
+            <a>My Agenda</a>
+          </button>
+        </Link>
       </div>
     </Layout>
   );

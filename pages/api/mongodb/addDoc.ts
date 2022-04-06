@@ -40,9 +40,9 @@ export default async function handler(
         .db()
         .collection("Doctors")
         .insertOne(newDoctor);
-      res.redirect("/mydoctorprofile");
+      res.redirect("/DocForm");
     } else {
-      res.status(200).redirect("/");
+      res.status(200).redirect("/api/auth/loginDoc");
     }
   } else {
     res.statusCode = 405;

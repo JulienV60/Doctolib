@@ -6,16 +6,33 @@ const Home: NextPage = ({ data }: any) => {
   return (
     <div>
       <Layout>
-        <form className="form-inline" action="POST">
+        <form
+          className="form-inline"
+          method="GET"
+          action="/PatientPath/path?speciality=&city="
+        >
           <input
             className="form-control mr-sm-2"
             type="search"
-            placeholder="Search"
+            placeholder="Speciality:"
             aria-label="Search"
+            name="speciality"
           />
+          <input
+            className="form-control mr-sm-2"
+            type="search"
+            placeholder="City:"
+            aria-label="Search"
+            name="city"
+          />
+          <button
+            className="btn btn-outline-dark my-2 my-sm-0"
+            type="submit"
+            id="LogDoc"
+          >
+            <a>Search </a>
+          </button>
         </form>
-
-        <form className="form-inline" action="#"></form>
       </Layout>
     </div>
   );
