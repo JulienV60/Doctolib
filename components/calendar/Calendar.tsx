@@ -11,7 +11,7 @@ const times = [
   "17:00 - 18:00",
 ];
 
-const BookDrivingSlot = (props) => {
+const BookDrivingSlot = (props: any) => {
   const [bookingDate, setBookingDate] = useState(null);
   const [selectedTimeSlot, setSelectedTimeSlot] = useState(null);
   const [bookingTimes, setBookingTimes] = useState([]);
@@ -29,11 +29,11 @@ const BookDrivingSlot = (props) => {
     setBookingTimes(newBookingTimes);
   }, [bookingDate]);
 
-  const onDateChange = (e) => {
+  const onDateChange = (e: any) => {
     setSelectedTimeSlot(null);
     setBookingDate(e.value);
   };
-  console.log(bookingTimes);
+
   return (
     <div className="k-my-8">
       <div className="k-mb-4 k-font-weight-bold">Select ur availability</div>
