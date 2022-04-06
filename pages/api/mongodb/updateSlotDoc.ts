@@ -10,16 +10,15 @@ export default async function Handler(
   res: NextApiResponse
 ) {
   if (req.method === "POST") {
-    console.log(req.query);
-    const date = req.query.date;
-    const time = req.query.time;
-    const hours = req.query.hours;
-    const hoursArray = hours.toString().split(",")
+    const test = req.query.test;
+    const newArray = JSON.parse(test);
 
-    const hoursSlots = Object.assign({}, hoursArray)
-    console.log(hoursSlots);
-
-    console.log("tests test2 ", hoursArray);
+    const essai = newArray.map((e: any) => {
+      {
+        return { hours: e.label, available: true };
+      }
+    });
+    console.log(essai);
 
     const mongodb = await getDatabase();
     const cookies = { cookie: getCookies({ req, res }) };
@@ -41,24 +40,10 @@ export default async function Handler(
       .collection("Doctors")
       .findOne({ email: mailUserAuth0 });
     if (searchIfAlreadyhere !== null) {
-      const idunique = uuidv4();
-      const updateSlotDoc = await mongodb
-        .db()
-        .collection("Doctors")
-        .updateOne(
-          { email: mailUserAuth0 },
-          {
-            $push: {
-              Slot: {
-                id: new ObjectId(),
-                date: date,
-                time: time,
-                hours : hoursSlots,
-                available: true,
-              },
-            },
-          }
-        );
+      // const updateSlotDoc = await mongodb
+      //   .db()
+      //   .collection("Doctors")
+      //   .updateOne({ email: mailUserAuth0 });
     } else {
       res.status(200).redirect("/api/auth/loginDoc");
     }
@@ -70,4 +55,3 @@ export default async function Handler(
 function typeOf(morning: string | string[]): any {
   throw new Error("Function not implemented.");
 }
-
