@@ -25,7 +25,7 @@ export default async function handler(
       .findOne({ "Slot.id": new ObjectId(idButton) })
       .then((data) => data?.Slot);
     // console.log(searchDb);
-    const Rdv = searchDb.filter((element: any) => {
+    const Slot = searchDb.filter((element: any) => {
       return element.id == idButton;
     });
 
@@ -63,13 +63,17 @@ export default async function handler(
     //   res.redirect("/PatientForm");
     // } else {
     //   res.statu
-    if (AccessTokenPatient !== undefined && Rdv !== null) {
+    console.log(AccessTokenPatient);
+    if (AccessTokenPatient !== undefined && Slot !== null) {
       res.redirect("/PatientForm");
     } else {
-      res.status(200).redirect("/api/auth/login");
+      res.redirect("/PleaseLogin");
     }
   } else {
     res.statusCode = 405;
     res.end();
   }
+}
+function s(arg0: string, s: any) {
+  throw new Error("Function not implemented.");
 }
