@@ -19,6 +19,12 @@ export default async function handler(
       maxAge: 0,
       path: "/",
     }),
+    cookie.serialize("Slot", "deleted", {
+      httpOnly: true,
+      secure: process.env.NODE_ENV !== "development",
+      maxAge: 0,
+      path: "/",
+    }),
   ]);
   res.redirect(auth0);
 }
