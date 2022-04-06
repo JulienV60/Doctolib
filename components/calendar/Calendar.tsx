@@ -27,7 +27,7 @@ const timeSlots: Slots[] = [
 ];
 
 const GiveAvailableSlots = (props: any) => {
-  const [bookingDate, setBookingDate] = useState(null);
+  const [bookingDate, setBookingDate] = useState(new Date());
   const [selectedTimeSlot, setSelectedTimeSlot] = useState<Slots[]>([]);
   const [bookingTimes, setBookingTimes] = useState([]);
   const timeSlotCacheRef = useRef(new Map());
@@ -48,8 +48,6 @@ const GiveAvailableSlots = (props: any) => {
     setSelectedTimeSlot([]);
     setBookingDate(e.value);
   };
-
-
 
   const hours: string[] = selectedTimeSlot.map((e) => e.label);
 
