@@ -1,4 +1,6 @@
+import { getCookies } from "cookies-next";
 import { GetServerSideProps } from "next";
+import Link from "next/link";
 import Layout from "../../components/Layout";
 import { getDatabase } from "../../src/database";
 export const getServerSideProps: GetServerSideProps = async (context) => {
@@ -60,10 +62,21 @@ export default function LoginDoctor({ data }: any) {
             <div key={element.id}>
               <form
                 method="POST"
-                action="/api/mongodb/updatePatient"
+                action="/api/mongodb/addPatient"
                 id={element.id}
                 key={element.id}
               >
+                <p
+                  key={element.id}
+                  className="btn btn-outline-dark my-2 my-sm-0"
+                  // type="button"
+                  id={element.id}
+                  // name={element.id}
+                >
+                  {element.date}
+                  {element.time}
+                </p>
+                {/* <Link href="/api/auth/callback" passHref={true}> */}
                 <button
                   key={element.id}
                   className="btn btn-outline-dark my-2 my-sm-0"
@@ -71,9 +84,9 @@ export default function LoginDoctor({ data }: any) {
                   id={element.id}
                   name={element.id}
                 >
-                  {element.date}
-                  {element.time}
+                  <a>Book this slot</a>
                 </button>
+                {/* </Link> */}
               </form>
             </div>
           );
