@@ -12,6 +12,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     .collection("Doctors")
     .find({ speciality: speciality, city: city })
     .toArray();
+  console.log(filterdbDoc[0].Slot);
   const stringifyResult = JSON.stringify(filterdbDoc);
   return {
     props: {
@@ -22,7 +23,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 export default function LoginDoctor({ data }: any) {
   const dataParse = JSON.parse(data);
   const slotdata = dataParse.map((element: any) => {
-    return element.Slot;
+    return element.Slot[0];
   });
 
   return (
@@ -31,63 +32,56 @@ export default function LoginDoctor({ data }: any) {
         {dataParse.map((element: any, index: any) => {
           return (
             <div key={index}>
-              <p key={index}>{element.category}</p>
-              <p key={index}>{element.firstName}</p>
-              <p key={index}>{element.lastName}</p>
-              <p key={index}>{element.speciality}</p>
-              <div key={element.id}>
-                <form
-                  method="POST"
-                  action="/api/mongodb/updatePatient"
-                  id={element.id}
-                  key={element.id}
-                >
-                  <button
-                    key={element.id}
-                    className="btn btn-outline-dark my-2 my-sm-0"
-                    type="submit"
-                    id={element.id}
-                    name={element.id}
-                  >
+              {element.category}
+              {element.lastName}
+              <br></br>
+              {element.Slot.map((element: any, index: any) => {
+                return (
+                  <div key={index}>
                     {element.date}
-                    {element.time}
-                  </button>
-                </form>
-              </div>
-            </div>
-          );
-        })}
-        {slotdata[0].map((element: any, index: any) => {
-          return (
-            <div key={element.id}>
-              <form
-                method="POST"
-                action="/api/mongodb/addPatient"
-                id={element.id}
-                key={element.id}
-              >
-                <p
-                  key={element.id}
-                  className="btn btn-outline-dark my-2 my-sm-0"
-                  // type="button"
-                  id={element.id}
-                  // name={element.id}
-                >
-                  {element.date}
-                  {element.time}
-                </p>
-                {/* <Link href="/api/auth/callback" passHref={true}> */}
-                <button
-                  key={element.id}
-                  className="btn btn-outline-dark my-2 my-sm-0"
-                  type="submit"
-                  id={element.id}
-                  name={element.id}
-                >
-                  <a>Book this slot</a>
-                </button>
-                {/* </Link> */}
-              </form>
+
+                    {element.hours === undefined || null ? (
+                      <>No slots available</>
+                    ) : (
+                      element.hours.map((element: any, index: any) => {
+                        return (
+                          <div key={index}>
+                            {element.avalaible === true ? (
+                              <form
+                                method="POST"
+                                action="/api/mongodb/updatePatient"
+                              >
+                                <button
+                                  className="btn btn-outline-dark my-2 my-sm-0"
+                                  id={element._id_slot}
+                                >
+                                  {element.hours}
+                                </button>
+                              </form>
+                            ) : (
+                              <>
+                                {" "}
+                                <form
+                                  method="POST"
+                                  action="/api/mongodb/updatePatient"
+                                >
+                                  <button
+                                    disabled={element.available === false}
+                                    className="btn btn-outline-dark my-2 my-sm-0"
+                                    id={element._id_slot}
+                                  >
+                                    {element.hours}
+                                  </button>
+                                </form>
+                              </>
+                            )}
+                          </div>
+                        );
+                      })
+                    )}
+                  </div>
+                );
+              })}
             </div>
           );
         })}
