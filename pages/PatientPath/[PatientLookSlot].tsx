@@ -12,7 +12,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     .collection("Doctors")
     .find({ speciality: speciality, city: city })
     .toArray();
-  console.log(filterdbDoc[0].Slot);
+
   const stringifyResult = JSON.stringify(filterdbDoc);
   return {
     props: {

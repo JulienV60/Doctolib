@@ -10,7 +10,7 @@ export default async function Handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  if (req.method === "POST") {
+  if (req.method === "POST" || "GET") {
     const mongodb = await getDatabase();
     const cookies = { cookie: getCookies({ req, res }) };
 
@@ -21,11 +21,9 @@ export default async function Handler(
 
     const essai = newArray.map((e: any) => {
       {
-        return { _id_slot : new ObjectId(), hours: e.label, available: true };
+        return { _id_slot: new ObjectId(), hours: e.label, available: true };
       }
     });
-    console.log(essai);
-
 
     const AccessTokenDoc = cookies.cookie.AccessTokenDoc;
 
@@ -45,22 +43,25 @@ export default async function Handler(
       .db()
       .collection("Doctors")
       .findOne({ email: mailUserAuth0 });
+
     if (searchIfAlreadyhere !== null) {
       const updateSlotDoc = await mongodb
         .db()
         .collection("Doctors")
-        .updateOne({ email: mailUserAuth0 },
+        .updateOne(
+          { email: mailUserAuth0 },
           {
-            $push : {
+            $push: {
               Slot: {
-                _id_date : new ObjectId(),
-                date : date,
-                hours : essai,
-              }
-            }
-        });
+                _id_date: new ObjectId(),
+                date: date,
+                hours: essai,
+              },
+            },
+          }
+        );
     } else {
-      res.status(200).redirect("/api/auth/loginDoc");
+      res.status(200).redirect("/PleaseLoginDoc");
     }
   } else {
     res.statusCode = 405;

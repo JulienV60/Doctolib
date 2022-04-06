@@ -12,19 +12,17 @@ export default async function handler(
     const cookies = { cookie: getCookies({ req, res }) };
 
     const AccessTokenPatient = cookies.cookie.AccessTokenPatient;
-    console.log(cookies);
 
-    console.log("AccessTokenPatient", AccessTokenPatient);
     const idButtonArray = Object.keys(result);
     const idButton = idButtonArray[0];
-    // console.log(idButton);
+
     const mongodb = await getDatabase();
     const searchDb = await mongodb
       .db()
       .collection("Doctors")
       .findOne({ "Slot.id": new ObjectId(idButton) })
       .then((data) => data?.Slot);
-    // console.log(searchDb);
+
     const Slot = searchDb.filter((element: any) => {
       return element.id == idButton;
     });
@@ -63,7 +61,7 @@ export default async function handler(
     //   res.redirect("/PatientForm");
     // } else {
     //   res.statu
-    console.log(AccessTokenPatient);
+
     if (AccessTokenPatient !== undefined && Slot !== null) {
       res.redirect("/PatientForm");
     } else {
