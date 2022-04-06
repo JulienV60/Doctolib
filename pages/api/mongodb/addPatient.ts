@@ -63,6 +63,7 @@ export default async function handler(
     //   res.redirect("/PatientForm");
     // } else {
     //   res.statu
+    console.log(AccessTokenPatient);
     if (AccessTokenPatient !== undefined && Slot !== null) {
       res.redirect("/PatientForm");
     } else {
