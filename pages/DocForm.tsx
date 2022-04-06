@@ -1,8 +1,10 @@
 import Layout from "../components/Layout";
 import React, { useState } from "react";
 import Link from "next/link";
+import { MultiSelect } from "react-multi-select-component";
 
-export default function formDoc() {
+
+export default function FormDoc() {
   return (
     <Layout>
       <div>

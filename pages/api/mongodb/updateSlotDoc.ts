@@ -3,7 +3,9 @@ import { ObjectId } from "mongodb";
 import type { NextApiRequest, NextApiResponse } from "next";
 import { getDatabase } from "../../../src/database";
 import { v4 as uuidv4 } from "uuid";
-export default async function handler(
+import { debugPort } from "process";
+
+export default async function Handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
@@ -11,6 +13,14 @@ export default async function handler(
     console.log(req.query);
     const date = req.query.date;
     const time = req.query.time;
+    const hours = req.query.hours;
+    const hoursArray = hours.toString().split(",")
+
+    const hoursSlots = Object.assign({}, hoursArray)
+    console.log(hoursSlots);
+
+    console.log("tests test2 ", hoursArray);
+
     const mongodb = await getDatabase();
     const cookies = { cookie: getCookies({ req, res }) };
     const AccessTokenDoc = cookies.cookie.AccessTokenDoc;
@@ -43,6 +53,7 @@ export default async function handler(
                 id: new ObjectId(),
                 date: date,
                 time: time,
+                hours : hoursSlots,
                 available: true,
               },
             },
@@ -56,3 +67,7 @@ export default async function handler(
     res.end();
   }
 }
+function typeOf(morning: string | string[]): any {
+  throw new Error("Function not implemented.");
+}
+
