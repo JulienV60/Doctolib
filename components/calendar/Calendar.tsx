@@ -26,9 +26,9 @@ const timeSlots: Slots[] = [
   { label: "16:00-17:00", value: "16:00-17:00", available: false },
 ];
 
-const BookDrivingSlot = (props: any) => {
+const GiveAvailableSlots = (props: any) => {
   const [bookingDate, setBookingDate] = useState(null);
-  const [selectedTimeSlot, setSelectedTimeSlot] = useState<Slots[]>(timeSlots);
+  const [selectedTimeSlot, setSelectedTimeSlot] = useState<Slots[]>([]);
   const [bookingTimes, setBookingTimes] = useState([]);
   const timeSlotCacheRef = useRef(new Map());
 
@@ -49,6 +49,8 @@ const BookDrivingSlot = (props: any) => {
     setBookingDate(e.value);
   };
 
+
+
   const hours: string[] = selectedTimeSlot.map((e) => e.label);
 
   return (
@@ -65,7 +67,6 @@ const BookDrivingSlot = (props: any) => {
                 className="k-button k-mb-4"
                 onClick={(e) => setSelectedTimeSlot(time)}
               > */}
-          <pre>{JSON.stringify(selectedTimeSlot)}</pre>
 
           <MultiSelect
             options={timeSlots}
@@ -82,7 +83,7 @@ const BookDrivingSlot = (props: any) => {
 
       {bookingDate && selectedTimeSlot ? (
         <div>
-          Selected slot: {bookingDate.toDateString()} at {hours}
+          Selected slot: {bookingDate.toDateString()} at {`${hours}`}
           <form
             method="POST"
             action={`/api/mongodb/updateSlotDoc?date=${bookingDate.toDateString()}&hours=${hours}&test=${JSON.stringify(
@@ -97,4 +98,4 @@ const BookDrivingSlot = (props: any) => {
   );
 };
 
-export default BookDrivingSlot;
+export default GiveAvailableSlots;
