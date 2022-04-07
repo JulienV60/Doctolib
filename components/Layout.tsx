@@ -95,14 +95,24 @@ const Layout: React.FC = ({ children }: any) => {
                   </button>
                 </Link>
               ) : (
-                <Link href="/api/auth/logout" passHref={true}>
-                  <button
-                    className="btn btn-outline-white my-2 my-sm-0"
-                    type="submit"
-                  >
-                    <a>Logout</a>
-                  </button>
-                </Link>
+                <div>
+                  <Link href="/api/auth/logout" passHref={true}>
+                    <button
+                      className="btn btn-outline-white my-2 my-sm-0"
+                      type="submit"
+                    >
+                      <a>Logout</a>
+                    </button>
+                  </Link>
+                  <Link href="/PatientProfile" passHref={true}>
+                    <button
+                      className="btn btn-outline-white my-2 my-sm-0"
+                      type="submit"
+                    >
+                      <a>My Profile</a>
+                    </button>
+                  </Link>
+                </div>
               )}
             </div>
             <div>
@@ -117,14 +127,24 @@ const Layout: React.FC = ({ children }: any) => {
                   </button>
                 </Link>
               ) : (
-                <Link href="/api/auth/logoutDoc" passHref={true}>
-                  <button
-                    className="btn btn-outline-white my-2 my-sm-0"
-                    type="submit"
-                  >
-                    <a>Logout</a>
-                  </button>
-                </Link>
+                <div>
+                  <Link href="/api/auth/logoutDoc" passHref={true}>
+                    <button
+                      className="btn btn-outline-white my-2 my-sm-0"
+                      type="submit"
+                    >
+                      <a>Logout</a>
+                    </button>
+                  </Link>
+                  <Link href="/" passHref={true}>
+                    <button
+                      className="btn btn-outline-white my-2 my-sm-0"
+                      type="submit"
+                    >
+                      <a>My Profile</a>
+                    </button>
+                  </Link>
+                </div>
               )}
             </div>
           </div>
