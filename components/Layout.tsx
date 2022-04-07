@@ -20,6 +20,21 @@ const Layout: React.FC = ({ children }: any) => {
     fetchApi();
   }, []);
 
+  const [cookieDoctor, setCookieDoctor] = React.useState<any>("");
+
+  React.useEffect(() => {
+    async function fetchApi() {
+      let response = await fetch(`/api/cookie`);
+      response = await response
+        .json()
+        .then((data) => data.cookie.AccessTokenDoc);
+
+      setCookieDoctor(response);
+    }
+
+    fetchApi();
+  }, []);
+
   return (
     <>
       <Head>
@@ -88,15 +103,26 @@ const Layout: React.FC = ({ children }: any) => {
                 </button>
               </Link>
             )}
-            <Link href="/api/auth/loginDoc" key={"idDoc"} passHref={true}>
-              <button
-                className="btn btn-outline-dark my-2 my-sm-0"
-                type="submit"
-                id="LogDoc"
-              >
-                <a>Are you a Doctor ? </a>
-              </button>
-            </Link>
+            {!cookieDoctor ? (
+              <Link href="/api/auth/loginDoc" key={"idDoc"} passHref={true}>
+                <button
+                  className="btn btn-outline-dark my-2 my-sm-0"
+                  type="submit"
+                  id="LogDoc"
+                >
+                  <a>Are you a Doctor ? </a>
+                </button>
+              </Link>
+            ) : (
+              <Link href="/api/auth/logoutDoc" passHref={true}>
+                <button
+                  className="btn btn-outline-dark my-2 my-sm-0"
+                  type="submit"
+                >
+                  <a>Logout</a>
+                </button>
+              </Link>
+            )}
           </div>
         </nav>
         {children}
