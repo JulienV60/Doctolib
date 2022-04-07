@@ -19,7 +19,7 @@ export default async function Handler(
 
     const idSlot = SplitSlot[0];
     const indexSlot = SplitSlot[1];
-
+    console.log(indexSlot);
     const auth0searchUser = await fetch(
       `https://${process.env.AUTH0_DOMAIN}/userinfo`,
       {
@@ -717,7 +717,7 @@ export default async function Handler(
             }
           );
         res.redirect("/ConfirmSlot");
-      };
+      }
     }
   } else {
     res.redirect("/");
