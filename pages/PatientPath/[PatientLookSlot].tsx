@@ -21,16 +21,21 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     },
   };
 };
+
 export default function LoginDoctor({ data }: any) {
   const dataParse = JSON.parse(data);
-  const slotdata = dataParse.map((element: any) => {
-    return element.Slot[0];
-  });
+  // const slotdata = dataParse.map((element: any) => {
+  //   return element.Slot[0];
+  // });
+  console.log(dataParse);
+
 
   return (
     <div className="PagePatientLookSlot">
       <Layout>
         <div className="Container">
+          {dataParse[0].slot}
+          {/* {() => {if(dataParse.length === 0){ */}
           {dataParse.map((element: any, index: any) => {
             return (
               <div className="Element" key={index}>
@@ -103,6 +108,13 @@ export default function LoginDoctor({ data }: any) {
               </div>
             );
           })}
+        {/* }else {
+          return (
+            <p>No doctors available for your research</p>
+          )
+        }}} */
+        }
+
         </div>
       </Layout>
     </div>

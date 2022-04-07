@@ -79,6 +79,59 @@ export default async function Handler(
     if (indexSlot === "0") {
       const searchDbDoctorIdRdv = await mongodb
         .db()
+
+        .collection("Patients")
+        .insertOne(newPatient);
+      if (indexSlot === "0") {
+        const searchDbDoctorIdRdv = await mongodb
+          .db()
+          .collection("Doctors")
+          .updateOne(
+            {
+              "Slot.hours._id_slot": new ObjectId(idSlot),
+            },
+            {
+              $set: { "Slot.$.hours.0.available": false },
+            }
+          );
+        const insertPatientinDbDoctors = await mongodb
+          .db()
+          .collection("Doctors")
+          .updateOne(
+            {
+              email: mailDoc,
+            },
+            {
+              $push: {
+                Reserved: {
+                  id: idSlot,
+                  name: req.body.firstName,
+                  date: appointmentDate,
+                  email: mailUserAuth0,
+                  phone: req.body.phone,
+                  slot: patientSlot,
+                },
+              },
+            }
+          );
+        const dbPatientUpdate = await mongodb
+          .db()
+          .collection("Patients")
+          .updateOne(
+            { email: mailUserAuth0 },
+            {
+              $push: {
+                Appointments: {
+                  id: idSlot,
+                  category: categoryDoc,
+                  firstName: nameDoc,
+                  lastName: lastNameDoc,
+                  city: cityDoc,
+                  speciality: specialityDoc,
+                  date: appointmentDate,
+                  slot: patientSlot,
+                },
+
         .collection("Doctors")
         .updateOne(
           {
@@ -104,8 +157,41 @@ export default async function Handler(
                 email: mailUserAuth0,
                 phone: req.body.phone,
                 slot: patientSlot,
+
               },
             },
+
+            {
+              $push: {
+                Reserved: {
+                  id: idSlot,
+                  name: req.body.firstName,
+                  date: appointmentDate,
+                  email: mailUserAuth0,
+                  phone: req.body.phone,
+                  slot: patientSlot,
+                },
+              },
+            }
+          );
+        const dbPatientUpdate = await mongodb
+          .db()
+          .collection("Patients")
+          .updateOne(
+            { email: mailUserAuth0 },
+            {
+              $push: {
+                Appointments: {
+                  id: idSlot,
+                  category: categoryDoc,
+                  firstName: nameDoc,
+                  lastName: lastNameDoc,
+                  city: cityDoc,
+                  speciality: specialityDoc,
+                  date: appointmentDate,
+                  slot: patientSlot,
+                },
+
           }
         );
       const dbPatientUpdate = await mongodb
@@ -124,8 +210,41 @@ export default async function Handler(
                 speciality: specialityDoc,
                 date: appointmentDate,
                 slot: patientSlot,
+
               },
             },
+
+            {
+              $push: {
+                Reserved: {
+                  id: idSlot,
+                  name: req.body.firstName,
+                  date: appointmentDate,
+                  email: mailUserAuth0,
+                  phone: req.body.phone,
+                  slot: patientSlot,
+                },
+              },
+            }
+          );
+        const dbPatientUpdate = await mongodb
+          .db()
+          .collection("Patients")
+          .updateOne(
+            { email: mailUserAuth0 },
+            {
+              $push: {
+                Appointments: {
+                  id: idSlot,
+                  category: categoryDoc,
+                  firstName: nameDoc,
+                  lastName: lastNameDoc,
+                  city: cityDoc,
+                  speciality: specialityDoc,
+                  date: appointmentDate,
+                  slot: patientSlot,
+                },
+
           }
         );
 
@@ -158,8 +277,41 @@ export default async function Handler(
                 email: mailUserAuth0,
                 phone: req.body.phone,
                 slot: patientSlot,
+
               },
             },
+
+            {
+              $push: {
+                Reserved: {
+                  id: idSlot,
+                  name: req.body.firstName,
+                  date: appointmentDate,
+                  email: mailUserAuth0,
+                  phone: req.body.phone,
+                  slot: patientSlot,
+                },
+              },
+            }
+          );
+        const dbPatientUpdate = await mongodb
+          .db()
+          .collection("Patients")
+          .updateOne(
+            { email: mailUserAuth0 },
+            {
+              $push: {
+                Appointments: {
+                  id: idSlot,
+                  category: categoryDoc,
+                  firstName: nameDoc,
+                  lastName: lastNameDoc,
+                  city: cityDoc,
+                  speciality: specialityDoc,
+                  date: appointmentDate,
+                  slot: patientSlot,
+                },
+
           }
         );
       const dbPatientUpdate = await mongodb
@@ -178,8 +330,41 @@ export default async function Handler(
                 speciality: specialityDoc,
                 date: appointmentDate,
                 slot: patientSlot,
+
               },
             },
+
+            {
+              $push: {
+                Reserved: {
+                  id: idSlot,
+                  name: req.body.firstName,
+                  date: appointmentDate,
+                  email: mailUserAuth0,
+                  phone: req.body.phone,
+                  slot: patientSlot,
+                },
+              },
+            }
+          );
+        const dbPatientUpdate = await mongodb
+          .db()
+          .collection("Patients")
+          .updateOne(
+            { email: mailUserAuth0 },
+            {
+              $push: {
+                Appointments: {
+                  id: idSlot,
+                  category: categoryDoc,
+                  firstName: nameDoc,
+                  lastName: lastNameDoc,
+                  city: cityDoc,
+                  speciality: specialityDoc,
+                  date: appointmentDate,
+                  slot: patientSlot,
+                },
+
           }
         );
       res.redirect("/ConfirmSlot");
@@ -211,8 +396,52 @@ export default async function Handler(
                 email: mailUserAuth0,
                 phone: req.body.phone,
                 slot: patientSlot,
+
               },
             },
+
+            {
+              $set: { "Slot.$.hours.5.available": false },
+            }
+          );
+        const insertPatientinDbDoctors = await mongodb
+          .db()
+          .collection("Doctors")
+          .updateOne(
+            {
+              email: mailDoc,
+            },
+            {
+              $push: {
+                Reserved: {
+                  id: idSlot,
+                  name: req.body.firstName,
+                  date: appointmentDate,
+                  email: mailUserAuth0,
+                  phone: req.body.phone,
+                  slot: patientSlot,
+                },
+              },
+            }
+          );
+        const dbPatientUpdate = await mongodb
+          .db()
+          .collection("Patients")
+          .updateOne(
+            { email: mailUserAuth0 },
+            {
+              $push: {
+                Appointments: {
+                  id: idSlot,
+                  category: categoryDoc,
+                  firstName: nameDoc,
+                  lastName: lastNameDoc,
+                  city: cityDoc,
+                  speciality: specialityDoc,
+                  date: appointmentDate,
+                  slot: patientSlot,
+                },
+
           }
         );
       const dbPatientUpdate = await mongodb
@@ -231,6 +460,7 @@ export default async function Handler(
                 speciality: specialityDoc,
                 date: appointmentDate,
                 slot: patientSlot,
+
               },
             },
           }
@@ -266,6 +496,18 @@ export default async function Handler(
                 slot: patientSlot,
               },
             },
+
+            {
+              $push: {
+                Reserved: {
+                  id: idSlot,
+                  name: req.body.firstName,
+                  date: appointmentDate,
+                  email: mailUserAuth0,
+                  phone: req.body.phone,
+                  slot: patientSlot,
+                },
+
           }
         );
       const dbPatientUpdate = await mongodb
@@ -284,6 +526,7 @@ export default async function Handler(
                 speciality: specialityDoc,
                 date: appointmentDate,
                 slot: patientSlot,
+
               },
             },
           }
@@ -339,6 +582,18 @@ export default async function Handler(
                 slot: patientSlot,
               },
             },
+
+            {
+              $push: {
+                Reserved: {
+                  id: idSlot,
+                  name: req.body.firstName,
+                  date: appointmentDate,
+                  email: mailUserAuth0,
+                  phone: req.body.phone,
+                  slot: patientSlot,
+                },
+
           }
         );
       res.redirect("/ConfirmSlot");
@@ -370,6 +625,7 @@ export default async function Handler(
                 email: mailUserAuth0,
                 phone: req.body.phone,
                 slot: patientSlot,
+
               },
             },
           }
@@ -427,6 +683,18 @@ export default async function Handler(
                 slot: patientSlot,
               },
             },
+
+            {
+              $push: {
+                Reserved: {
+                  id: idSlot,
+                  name: req.body.firstName,
+                  date: appointmentDate,
+                  email: mailUserAuth0,
+                  phone: req.body.phone,
+                  slot: patientSlot,
+                },
+
           }
         );
       const dbPatientUpdate = await mongodb
@@ -445,6 +713,7 @@ export default async function Handler(
                 speciality: specialityDoc,
                 date: appointmentDate,
                 slot: patientSlot,
+
               },
             },
           }
@@ -501,6 +770,18 @@ export default async function Handler(
                 slot: patientSlot,
               },
             },
+
+            {
+              $push: {
+                Reserved: {
+                  id: idSlot,
+                  name: req.body.firstName,
+                  date: appointmentDate,
+                  email: mailUserAuth0,
+                  phone: req.body.phone,
+                  slot: patientSlot,
+                },
+
           }
         );
       res.redirect("/ConfirmSlot");
@@ -532,6 +813,7 @@ export default async function Handler(
                 email: mailUserAuth0,
                 phone: req.body.phone,
                 slot: patientSlot,
+
               },
             },
           }
@@ -587,6 +869,18 @@ export default async function Handler(
                 slot: patientSlot,
               },
             },
+
+            {
+              $push: {
+                Reserved: {
+                  id: idSlot,
+                  name: req.body.firstName,
+                  date: appointmentDate,
+                  email: mailUserAuth0,
+                  phone: req.body.phone,
+                  slot: patientSlot,
+                },
+
           }
         );
       const dbPatientUpdate = await mongodb
@@ -605,6 +899,7 @@ export default async function Handler(
                 speciality: specialityDoc,
                 date: appointmentDate,
                 slot: patientSlot,
+
               },
             },
           }
@@ -660,6 +955,18 @@ export default async function Handler(
                 slot: patientSlot,
               },
             },
+
+            {
+              $push: {
+                Reserved: {
+                  id: idSlot,
+                  name: req.body.firstName,
+                  date: appointmentDate,
+                  email: mailUserAuth0,
+                  phone: req.body.phone,
+                  slot: patientSlot,
+                },
+
           }
         );
       res.redirect("/ConfirmSlot");
@@ -691,6 +998,7 @@ export default async function Handler(
                 email: mailUserAuth0,
                 phone: req.body.phone,
                 slot: patientSlot,
+
               },
             },
           }
