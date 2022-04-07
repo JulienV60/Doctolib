@@ -2,6 +2,7 @@ import Head from "next/head";
 import React from "react";
 import Link from "next/link";
 import { cp } from "fs/promises";
+import Image from "next/image";
 
 const Layout: React.FC = ({ children }: any) => {
   const [cookiePatient, setCookie] = React.useState<any>("");
@@ -14,6 +15,21 @@ const Layout: React.FC = ({ children }: any) => {
         .then((data) => data.cookie.AccessTokenPatient);
 
       setCookie(response);
+    }
+
+    fetchApi();
+  }, []);
+
+  const [cookieDoctor, setCookieDoctor] = React.useState<any>("");
+
+  React.useEffect(() => {
+    async function fetchApi() {
+      let response = await fetch(`/api/cookie`);
+      response = await response
+        .json()
+        .then((data) => data.cookie.AccessTokenDoc);
+
+      setCookieDoctor(response);
     }
 
     fetchApi();
@@ -43,7 +59,13 @@ const Layout: React.FC = ({ children }: any) => {
         <nav className="navbar navbar-expand-lg navbar-primary bg-primary">
           <div className="container-fluid">
             <Link href="/">
-              <a className="navbar-brand user-select-none">Doctolib</a>
+              {/* <a className="navbar-brand user-select-none">Doctolib</a> */}
+              <Image
+                src="/logoDoctolib.png"
+                width={120}
+                height={50}
+                alt="logoDoctolib"
+              />
             </Link>
 
             <button
@@ -81,15 +103,26 @@ const Layout: React.FC = ({ children }: any) => {
                 </button>
               </Link>
             )}
-            <Link href="/api/auth/loginDoc" key={"idDoc"} passHref={true}>
-              <button
-                className="btn btn-outline-dark my-2 my-sm-0"
-                type="submit"
-                id="LogDoc"
-              >
-                <a>Are you a Doctor ? </a>
-              </button>
-            </Link>
+            {!cookieDoctor ? (
+              <Link href="/api/auth/loginDoc" key={"idDoc"} passHref={true}>
+                <button
+                  className="btn btn-outline-dark my-2 my-sm-0"
+                  type="submit"
+                  id="LogDoc"
+                >
+                  <a>Are you a Doctor ? </a>
+                </button>
+              </Link>
+            ) : (
+              <Link href="/api/auth/logoutDoc" passHref={true}>
+                <button
+                  className="btn btn-outline-dark my-2 my-sm-0"
+                  type="submit"
+                >
+                  <a>Logout</a>
+                </button>
+              </Link>
+            )}
           </div>
         </nav>
         {children}
