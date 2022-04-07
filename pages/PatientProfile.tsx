@@ -13,7 +13,6 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
   const idSlot = SplitSlot[0];
   console.log("testidslot1", idSlot);
 
-
   const auth0searchUser = await fetch(
     `https://${process.env.AUTH0_DOMAIN}/userinfo`,
     {
@@ -36,51 +35,76 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
   return {
     props: {
       data: stringifyResult,
-      idSlot : idSlot,
+      idSlot: idSlot,
     },
   };
 };
 
-
 export default function PatientProfile({ data, idSlot }: any) {
   const result = JSON.parse(data);
+  if (result.find((element: any) => element.Appointments !== undefined)) {
+    const findAppointment = result[0].Appointments.filter(
+      (appointment: any) => {
+        return appointment.id.toString() === idSlot;
+      }
+    );
+  }
 
-  const findAppointment = result[0].Appointments.filter(
-    (appointment: any) => {
-      return appointment.id.toString() === idSlot;
-    }
-  )
-
-  return (
-    <div>
-      <Layout>
+  if (result.find((element: any) => element.Appointments !== undefined)) {
+    return (
+      <div>
+        <Layout>
           <h3>My details</h3>
-            <ul>
-              First name : {result[0].firstName}<br></br>
-              Last name : {result[0].lastName}<br></br>
-              Phone number : {result[0].phone}<br></br>
-              Email address : {result[0].email}
-            </ul>
-            <h4>Next appointments</h4>
-            {result[0].Appointments.map(
-              (appointment: any, index: any) => {
-                return <div key={index}>
-                  <ul>
-                  Name : {`${appointment.category} ${appointment.firstName} ${appointment.lastName} `}<br></br>
-                  Speciality : {appointment.speciality}<br></br>
+          <ul>
+            First name : {result[0].firstName}
+            <br></br>
+            Last name : {result[0].lastName}
+            <br></br>
+            Phone number : {result[0].phone}
+            <br></br>
+            Email address : {result[0].email}
+          </ul>
+          <h4>Next appointments</h4>
+          {result[0].Appointments.map((appointment: any, index: any) => {
+            return (
+              <div key={index}>
+                <ul>
+                  Name :{" "}
+                  {`${appointment.category} ${appointment.firstName} ${appointment.lastName} `}
+                  <br></br>
+                  Speciality : {appointment.speciality}
+                  <br></br>
                   Date : {appointment.date} <br></br>
                   Time : {appointment.slot} <br></br>
-                  </ul>
-                  </div>
-              }
-            )}
+                </ul>
+              </div>
+            );
+          })}
 
-            <form method="POST" action="/">
+          <form method="POST" action="/">
             <button type="submit" id="test2">
-            <a> Back to home page </a>
-          </button>
-            </form>
-      </Layout>
-    </div>
-  );
+              <a> Back to home page </a>
+            </button>
+          </form>
+        </Layout>
+      </div>
+    );
+  } else {
+    return (
+      <div>
+        <Layout>
+          <h3>My details</h3>
+          <ul>
+            First name : {result[0].firstName}
+            <br></br>
+            Last name : {result[0].lastName}
+            <br></br>
+            Phone number : {result[0].phone}
+            <br></br>
+            Email address : {result[0].email}
+          </ul>
+        </Layout>
+      </div>
+    );
+  }
 }
