@@ -39,7 +39,7 @@ export default function formPatient() {
             name="phone"
           ></input>
           <button type="submit" id="test2">
-            <a> Confirm ur appointments</a>
+            <a> Confirm your details</a>
           </button>
         </form>
       </div>
