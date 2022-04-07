@@ -20,6 +20,8 @@ export default async function handler(
     const tokenId = auth0.id_token;
     const Slot = cookies.cookie.Slot;
 
+    let response = await fetch(`http://localhost:3000/api/cookie`);
+    response = await response.json().then((data) => data.cookie.Slot);
     const cookieSlot = res.setHeader("Set-Cookie", [
       cookie.serialize("AccessTokenPatient", tokenAccess, {
         httpOnly: true,
@@ -36,6 +38,12 @@ export default async function handler(
         path: "/",
       }),
     ]);
+
+    if (Slot == undefined || null) {
+      res.redirect("/");
+    } else {
+      res.redirect("/PatientForm");
+    }
   } else {
     res.statusCode = 405;
     res.end();

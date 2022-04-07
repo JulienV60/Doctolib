@@ -19,7 +19,7 @@ export default function pleaseLogin({ data }: any) {
   console.log(result);
   return (
     <div>
-      <form action={`/api/auth/login?code=${result}`} method="GET">
+      <form action={`/api/auth/login`} method="GET">
         <button> Plz login</button>
       </form>
       ;
