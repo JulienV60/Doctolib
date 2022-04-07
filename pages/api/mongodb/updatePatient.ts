@@ -1,4 +1,6 @@
+import { ObjectID } from "bson";
 import { getCookies } from "cookies-next";
+import { cp } from "fs";
 import { ObjectId } from "mongodb";
 
 import type { NextApiRequest, NextApiResponse } from "next";
@@ -34,40 +36,33 @@ export default async function Handler(
       .db()
       .collection("Patients")
       .findOne({ email: mailUserAuth0 });
+    console.log(searchIfAlreadyhere);
     const searchforInputrdv = await mongodb
       .db()
       .collection("Doctors")
       .findOne({
         "Slot.hours._id_slot": new ObjectId(idSlot),
       });
-    console.log("id slot : ", idSlot);
+
     const categoryDoc = searchforInputrdv?.category;
     const nameDoc = searchforInputrdv?.firstName;
     const lastNameDoc = searchforInputrdv?.lastName;
     const cityDoc = searchforInputrdv?.city;
     const specialityDoc = searchforInputrdv?.speciality;
-    const findDateObject = searchforInputrdv?.Slot.filter(
-      (date: any) => {
-        return date.hours.filter(
-          (slot: any) => {
-            return slot._id_slot.toString() === idSlot;
-          }
-          ).length > 0
-        }
-        );
+    const mailDoc = searchforInputrdv?.email;
+    const findDateObject = searchforInputrdv?.Slot.filter((date: any) => {
+      return (
+        date.hours.filter((slot: any) => {
+          return slot._id_slot.toString() === idSlot;
+        }).length > 0
+      );
+    });
     const appointmentDate = findDateObject[0].date;
-    console.log("test date", appointmentDate);
 
-    const findSlotObject = findDateObject[0].hours.filter(
-      (slot: any) => {
-        return slot._id_slot.toString() === idSlot;
-      }
-    );
+    const findSlotObject = findDateObject[0].hours.filter((slot: any) => {
+      return slot._id_slot.toString() === idSlot;
+    });
     const patientSlot = findSlotObject[0].hours;
-    console.log("slot : ", patientSlot);
-
-
-    // console.log("test slot", appointmentDate);
 
     const newPatient = {
       category: "Patient",
@@ -76,27 +71,12 @@ export default async function Handler(
       email: mailUserAuth0,
       city: req.body.city,
       phone: req.body.phone,
-      appointments: {
-        $push: {
-          Appointments: {
-            id: idSlot,
-            category: categoryDoc,
-            firstName: nameDoc,
-            lastName: lastNameDoc,
-            city: cityDoc,
-            speciality: specialityDoc,
-            date : appointmentDate,
-            slot : patientSlot,
-          },
-        },
-      },
     };
-    if (searchIfAlreadyhere === null) {
+    if (searchIfAlreadyhere === null || undefined) {
       const addPatient = await mongodb
         .db()
         .collection("Patients")
         .insertOne(newPatient);
-
       if (indexSlot === "0") {
         const searchDbDoctorIdRdv = await mongodb
           .db()
@@ -107,6 +87,46 @@ export default async function Handler(
             },
             {
               $set: { "Slot.$.hours.0.available": false },
+            }
+          );
+        const insertPatientinDbDoctors = await mongodb
+          .db()
+          .collection("Doctors")
+          .updateOne(
+            {
+              email: mailDoc,
+            },
+            {
+              $push: {
+                Reserved: {
+                  id: indexSlot,
+                  name: req.body.firstName,
+                  date: appointmentDate,
+                  email: mailUserAuth0,
+                  phone: req.body.phone,
+                  slot: patientSlot,
+                },
+              },
+            }
+          );
+        const dbPatientUpdate = await mongodb
+          .db()
+          .collection("Patients")
+          .updateOne(
+            { email: mailUserAuth0 },
+            {
+              $push: {
+                Appointments: {
+                  id: idSlot,
+                  category: categoryDoc,
+                  firstName: nameDoc,
+                  lastName: lastNameDoc,
+                  city: cityDoc,
+                  speciality: specialityDoc,
+                  date: appointmentDate,
+                  slot: patientSlot,
+                },
+              },
             }
           );
 
@@ -123,6 +143,46 @@ export default async function Handler(
               $set: { "Slot.$.hours.1.available": false },
             }
           );
+        const insertPatientinDbDoctors = await mongodb
+          .db()
+          .collection("Doctors")
+          .updateOne(
+            {
+              email: mailDoc,
+            },
+            {
+              $push: {
+                Reserved: {
+                  id: indexSlot,
+                  name: req.body.firstName,
+                  date: appointmentDate,
+                  email: mailUserAuth0,
+                  phone: req.body.phone,
+                  slot: patientSlot,
+                },
+              },
+            }
+          );
+        const dbPatientUpdate = await mongodb
+          .db()
+          .collection("Patients")
+          .updateOne(
+            { email: mailUserAuth0 },
+            {
+              $push: {
+                Appointments: {
+                  id: idSlot,
+                  category: categoryDoc,
+                  firstName: nameDoc,
+                  lastName: lastNameDoc,
+                  city: cityDoc,
+                  speciality: specialityDoc,
+                  date: appointmentDate,
+                  slot: patientSlot,
+                },
+              },
+            }
+          );
         res.redirect("/ConfirmSlot");
       } else if (indexSlot === "2") {
         const searchDbDoctorIdRdv = await mongodb
@@ -134,6 +194,46 @@ export default async function Handler(
             },
             {
               $set: { "Slot.$.hours.2.available": false },
+            }
+          );
+        const insertPatientinDbDoctors = await mongodb
+          .db()
+          .collection("Doctors")
+          .updateOne(
+            {
+              email: mailDoc,
+            },
+            {
+              $push: {
+                Reserved: {
+                  id: indexSlot,
+                  name: req.body.firstName,
+                  date: appointmentDate,
+                  email: mailUserAuth0,
+                  phone: req.body.phone,
+                  slot: patientSlot,
+                },
+              },
+            }
+          );
+        const dbPatientUpdate = await mongodb
+          .db()
+          .collection("Patients")
+          .updateOne(
+            { email: mailUserAuth0 },
+            {
+              $push: {
+                Appointments: {
+                  id: idSlot,
+                  category: categoryDoc,
+                  firstName: nameDoc,
+                  lastName: lastNameDoc,
+                  city: cityDoc,
+                  speciality: specialityDoc,
+                  date: appointmentDate,
+                  slot: patientSlot,
+                },
+              },
             }
           );
         res.redirect("/ConfirmSlot");
@@ -149,6 +249,46 @@ export default async function Handler(
               $set: { "Slot.$.hours.3.available": false },
             }
           );
+        const insertPatientinDbDoctors = await mongodb
+          .db()
+          .collection("Doctors")
+          .updateOne(
+            {
+              email: mailDoc,
+            },
+            {
+              $push: {
+                Reserved: {
+                  id: indexSlot,
+                  name: req.body.firstName,
+                  date: appointmentDate,
+                  email: mailUserAuth0,
+                  phone: req.body.phone,
+                  slot: patientSlot,
+                },
+              },
+            }
+          );
+        const dbPatientUpdate = await mongodb
+          .db()
+          .collection("Patients")
+          .updateOne(
+            { email: mailUserAuth0 },
+            {
+              $push: {
+                Appointments: {
+                  id: idSlot,
+                  category: categoryDoc,
+                  firstName: nameDoc,
+                  lastName: lastNameDoc,
+                  city: cityDoc,
+                  speciality: specialityDoc,
+                  date: appointmentDate,
+                  slot: patientSlot,
+                },
+              },
+            }
+          );
         res.redirect("/ConfirmSlot");
       } else if (indexSlot === "4") {
         const searchDbDoctorIdRdv = await mongodb
@@ -160,6 +300,46 @@ export default async function Handler(
             },
             {
               $set: { "Slot.$.hours.4.available": false },
+            }
+          );
+        const insertPatientinDbDoctors = await mongodb
+          .db()
+          .collection("Doctors")
+          .updateOne(
+            {
+              email: mailDoc,
+            },
+            {
+              $push: {
+                Reserved: {
+                  id: indexSlot,
+                  name: req.body.firstName,
+                  date: appointmentDate,
+                  email: mailUserAuth0,
+                  phone: req.body.phone,
+                  slot: patientSlot,
+                },
+              },
+            }
+          );
+        const dbPatientUpdate = await mongodb
+          .db()
+          .collection("Patients")
+          .updateOne(
+            { email: mailUserAuth0 },
+            {
+              $push: {
+                Appointments: {
+                  id: idSlot,
+                  category: categoryDoc,
+                  firstName: nameDoc,
+                  lastName: lastNameDoc,
+                  city: cityDoc,
+                  speciality: specialityDoc,
+                  date: appointmentDate,
+                  slot: patientSlot,
+                },
+              },
             }
           );
         res.redirect("/ConfirmSlot");
@@ -175,10 +355,50 @@ export default async function Handler(
               $set: { "Slot.$.hours.5.available": false },
             }
           );
+        const insertPatientinDbDoctors = await mongodb
+          .db()
+          .collection("Doctors")
+          .updateOne(
+            {
+              email: mailDoc,
+            },
+            {
+              $push: {
+                Reserved: {
+                  id: indexSlot,
+                  name: req.body.firstName,
+                  date: appointmentDate,
+                  email: mailUserAuth0,
+                  phone: req.body.phone,
+                  slot: patientSlot,
+                },
+              },
+            }
+          );
+        const dbPatientUpdate = await mongodb
+          .db()
+          .collection("Patients")
+          .updateOne(
+            { email: mailUserAuth0 },
+            {
+              $push: {
+                Appointments: {
+                  id: idSlot,
+                  category: categoryDoc,
+                  firstName: nameDoc,
+                  lastName: lastNameDoc,
+                  city: cityDoc,
+                  speciality: specialityDoc,
+                  date: appointmentDate,
+                  slot: patientSlot,
+                },
+              },
+            }
+          );
         res.redirect("/ConfirmSlot");
       }
     } else {
-      res.status(200).redirect("/");
+      res.redirect("/");
     }
   } else {
     res.redirect("/");

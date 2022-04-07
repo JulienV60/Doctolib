@@ -19,6 +19,9 @@ export default async function handler(
     const tokenAccess = auth0.access_token;
     const tokenId = auth0.id_token;
     const Slot = cookies.cookie.Slot;
+
+    let response = await fetch(`http://localhost:3000/api/cookie`);
+    response = await response.json().then((data) => data.cookie.Slot);
     const cookieSlot = res.setHeader("Set-Cookie", [
       cookie.serialize("AccessTokenPatient", tokenAccess, {
         httpOnly: true,
@@ -35,8 +38,7 @@ export default async function handler(
         path: "/",
       }),
     ]);
-    console.log(Slot);
-    console.log("coucou", Slot);
+
     if (Slot == undefined || null) {
       res.redirect("/");
     } else {
