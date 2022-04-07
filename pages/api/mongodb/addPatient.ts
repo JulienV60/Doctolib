@@ -13,6 +13,7 @@ export default async function handler(
 
     const cookies = { cookie: getCookies({ req, res }) };
     const mongodb = await getDatabase();
+    console.log(cookies.cookie);
 
     const AccessTokenPatient = cookies.cookie.AccessTokenPatient;
     const idButtonArray = Object.keys(result);

@@ -45,8 +45,8 @@ export default async function handler(
     const lastNameDoc = searchforInputrdv?.lastName;
     const cityDoc = searchforInputrdv?.city;
     const specialityDoc = searchforInputrdv?.speciality;
-    const searchSlotByHours = searchforInputrdv?.Slot;
-
+    const appointmentDate = searchforInputrdv?.Slot[indexSlot];
+    console.log(appointmentDate);
     const newPatient = {
       category: "Patient",
       firstName: req.body.firstName,
@@ -54,18 +54,20 @@ export default async function handler(
       email: mailUserAuth0,
       city: req.body.city,
       phone: req.body.phone,
-      // appointments: {
-      //   $push: {
-      //     Appointments: {
-      //       id: idSlot,
-      //       category: categoryDoc,
-      //       firstName: nameDoc,
-      //       lastName: lastNameDoc,
-      //       city: cityDoc,
-      //       speciality: specialityDoc,
-      //     },
-      //   },
-      // },
+      appointments: {
+        $push: {
+          Appointments: {
+            id: idSlot,
+            category: categoryDoc,
+            firstName: nameDoc,
+            lastName: lastNameDoc,
+            city: cityDoc,
+            speciality: specialityDoc,
+            date: appointmentDate,
+            // time: appointmentTime.hours,
+          },
+        },
+      },
     };
     if (searchIfAlreadyhere === null) {
       const addPatient = await mongodb
