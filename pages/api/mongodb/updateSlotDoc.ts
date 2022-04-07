@@ -2,7 +2,7 @@ import { getCookies } from "cookies-next";
 import { ObjectId } from "mongodb";
 import type { NextApiRequest, NextApiResponse } from "next";
 import { getDatabase } from "../../../src/database";
-import { v4 as uuidv4 } from "uuid";
+
 import { debugPort } from "process";
 import { useWorkHours } from "@progress/kendo-react-scheduler/dist/npm/hooks";
 
