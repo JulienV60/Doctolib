@@ -36,7 +36,8 @@ export default async function handler(
       }),
     ]);
     console.log(Slot);
-    if (Slot == undefined) {
+    console.log("coucou", Slot);
+    if (Slot == undefined || null) {
       res.redirect("/");
     } else {
       res.redirect("/PatientForm");

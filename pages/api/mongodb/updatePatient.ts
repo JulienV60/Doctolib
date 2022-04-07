@@ -39,15 +39,13 @@ export default async function handler(
       .findOne({
         "Slot.hours._id_slot": new ObjectId(idSlot),
       });
-
+    console.log(searchIdRdvButton[0]);
     const categoryDoc = searchforInputrdv?.category;
     const nameDoc = searchforInputrdv?.firstName;
     const lastNameDoc = searchforInputrdv?.lastName;
     const cityDoc = searchforInputrdv?.city;
     const specialityDoc = searchforInputrdv?.speciality;
     const searchSlotByHours = searchforInputrdv?.Slot;
-
-    console.log(searchSlotByHours);
 
     const newPatient = {
       category: "Patient",
