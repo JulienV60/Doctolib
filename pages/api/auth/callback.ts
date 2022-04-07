@@ -36,6 +36,7 @@ export default async function handler(
       }),
     ]);
     console.log(Slot);
+    console.log("coucou", Slot);
     if (Slot == undefined || null) {
       res.redirect("/");
     } else {
