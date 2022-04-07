@@ -11,8 +11,6 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
   const searchIdRdvButton = cookies.cookie.Slot;
   const SplitSlot = searchIdRdvButton.split(",");
   const idSlot = SplitSlot[0];
-  console.log("testidslot1", idSlot);
-
 
   const auth0searchUser = await fetch(
     `https://${process.env.AUTH0_DOMAIN}/userinfo`,
@@ -32,7 +30,7 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
     .toArray();
 
   const stringifyResult = JSON.stringify(filterdbPatient);
-  // const stringifyIdSlot = JSON.stringify(idSlot);
+
   return {
     props: {
       data: stringifyResult,
@@ -45,11 +43,11 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
 export default function PatientProfile({ data, idSlot }: any) {
   const result = JSON.parse(data);
 
-  const findAppointment = result[0].Appointments.filter(
-    (appointment: any) => {
-      return appointment.id.toString() === idSlot;
-    }
-  )
+  // const findAppointment = result[0].Appointments.filter(
+  //   (appointment: any) => {
+  //     return appointment.id.toString() === idSlot;
+  //   }
+  // )
 
   return (
     <div>
@@ -62,21 +60,31 @@ export default function PatientProfile({ data, idSlot }: any) {
               Email address : {result[0].email}
             </ul>
             <h4>Next appointments</h4>
-            {result[0].Appointments.map(
-              (appointment: any, index: any) => {
-                return <div key={index}>
-                  <ul>
-                  Name : {`${appointment.category} ${appointment.firstName} ${appointment.lastName} `}<br></br>
-                  Speciality : {appointment.speciality}<br></br>
-                  Date : {appointment.date} <br></br>
-                  Time : {appointment.slot} <br></br>
-                  </ul>
-                  </div>
-              }
-            )}
+            {/* {() => {if(result[0].Appointments){ */}
+                {result[0].Appointments.map(
+                  (appointment: any, index: any) => {
+                    return <div key={index}>
+                      <ul>
+                      Name : {`${appointment.category} ${appointment.firstName} ${appointment.lastName} `}<br></br>
+                      Speciality : {appointment.speciality}<br></br>
+                      Date : {appointment.date} <br></br>
+                      Time : {appointment.slot} <br></br>
+                      <form method="POST" action={`/api/mongodb/cancelAppointment?id=${appointment.id}`}>
+                        <button>
+                          Cancel appointment
+                        </button>
+                      </form>
+                      </ul>
+                      </div>
+                  }
+                )}
+            {/* }else{
+              <p>You do not have any appointments</p>
+            }}} */}
+
 
             <form method="POST" action="/">
-            <button type="submit" id="test2">
+            <button type="submit" id="Home">
             <a> Back to home page </a>
           </button>
             </form>

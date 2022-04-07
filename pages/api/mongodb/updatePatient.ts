@@ -99,7 +99,7 @@ export default async function Handler(
             {
               $push: {
                 Reserved: {
-                  id: indexSlot,
+                  id: idSlot,
                   name: req.body.firstName,
                   date: appointmentDate,
                   email: mailUserAuth0,
@@ -153,7 +153,7 @@ export default async function Handler(
             {
               $push: {
                 Reserved: {
-                  id: indexSlot,
+                  id: idSlot,
                   name: req.body.firstName,
                   date: appointmentDate,
                   email: mailUserAuth0,
@@ -206,7 +206,7 @@ export default async function Handler(
             {
               $push: {
                 Reserved: {
-                  id: indexSlot,
+                  id: idSlot,
                   name: req.body.firstName,
                   date: appointmentDate,
                   email: mailUserAuth0,
@@ -259,7 +259,7 @@ export default async function Handler(
             {
               $push: {
                 Reserved: {
-                  id: indexSlot,
+                  id: idSlot,
                   name: req.body.firstName,
                   date: appointmentDate,
                   email: mailUserAuth0,
@@ -312,7 +312,7 @@ export default async function Handler(
             {
               $push: {
                 Reserved: {
-                  id: indexSlot,
+                  id: idSlot,
                   name: req.body.firstName,
                   date: appointmentDate,
                   email: mailUserAuth0,
@@ -365,7 +365,7 @@ export default async function Handler(
             {
               $push: {
                 Reserved: {
-                  id: indexSlot,
+                  id: idSlot,
                   name: req.body.firstName,
                   date: appointmentDate,
                   email: mailUserAuth0,
@@ -420,7 +420,7 @@ export default async function Handler(
             {
               $push: {
                 Reserved: {
-                  id: indexSlot,
+                  id: idSlot,
                   name: req.body.firstName,
                   date: appointmentDate,
                   email: mailUserAuth0,
@@ -474,7 +474,7 @@ export default async function Handler(
             {
               $push: {
                 Reserved: {
-                  id: indexSlot,
+                  id: idSlot,
                   name: req.body.firstName,
                   date: appointmentDate,
                   email: mailUserAuth0,
@@ -527,7 +527,7 @@ export default async function Handler(
             {
               $push: {
                 Reserved: {
-                  id: indexSlot,
+                  id: idSlot,
                   name: req.body.firstName,
                   date: appointmentDate,
                   email: mailUserAuth0,
@@ -580,7 +580,7 @@ export default async function Handler(
             {
               $push: {
                 Reserved: {
-                  id: indexSlot,
+                  id: idSlot,
                   name: req.body.firstName,
                   date: appointmentDate,
                   email: mailUserAuth0,
@@ -633,7 +633,7 @@ export default async function Handler(
             {
               $push: {
                 Reserved: {
-                  id: indexSlot,
+                  id: idSlot,
                   name: req.body.firstName,
                   date: appointmentDate,
                   email: mailUserAuth0,
@@ -686,7 +686,7 @@ export default async function Handler(
             {
               $push: {
                 Reserved: {
-                  id: indexSlot,
+                  id: idSlot,
                   name: req.body.firstName,
                   date: appointmentDate,
                   email: mailUserAuth0,

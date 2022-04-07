@@ -4,6 +4,7 @@ import type { NextApiRequest, NextApiResponse } from "next";
 import app from "next/app";
 import { getDatabase } from "../../../src/database";
 import cookie from "cookie";
+
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
