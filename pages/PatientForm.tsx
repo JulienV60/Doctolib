@@ -1,5 +1,6 @@
 import Layout from "../components/Layout";
 import React, { useState } from "react";
+
 import Link from "next/link";
 import { getCookies } from "cookies-next";
 import { GetServerSideProps } from "next";
@@ -53,6 +54,7 @@ export default function formPatient({ data, idSlot }: any) {
   //     return appointment.id.toString() === idSlot;
   //   }
   // )
+
 
   return (
     <Layout>
