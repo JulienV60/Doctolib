@@ -3,6 +3,7 @@ import { GetServerSideProps } from "next";
 import Link from "next/link";
 import Layout from "../../components/Layout";
 import { getDatabase } from "../../src/database";
+
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const speciality = context.query.speciality;
   const city = context.query.city;
@@ -27,67 +28,83 @@ export default function LoginDoctor({ data }: any) {
   });
 
   return (
-    <Layout>
-      <div>
-        {dataParse.map((element: any, index: any) => {
-          return (
-            <div key={index}>
-              {element.category}
-              {element.lastName}
-              <br></br>
-              {element.Slot.map((element: any, index: any) => {
-                return (
-                  <div key={index} id={element._id_date}>
-                    {element.date}
-
-                    {element.hours === undefined || null ? (
-                      <>No slots available</>
-                    ) : (
-                      element.hours.map((element: any, index: any) => {
-                        return (
-                          <div key={index}>
-                            {element.avalaible === true ? (
-                              <form
-                                method="POST"
-                                action={`/api/mongodb/addPatient?index=${index}&id=${element.id}`}
-                              >
-                                <button
-                                  className="btn btn-outline-dark my-2 my-sm-0"
-                                  id={`${element._id_slot}`}
-                                  name={`${element._id_slot}`}
-                                >
-                                  {element.hours}
-                                </button>
-                              </form>
-                            ) : (
-                              <>
-                                {" "}
-                                <form
-                                  method="POST"
-                                  action={`/api/mongodb/addPatient?index=${index}`}
-                                >
-                                  <button
-                                    disabled={element.available === false}
-                                    className="btn btn-outline-dark my-2 my-sm-0"
-                                    id={`${element._id_slot}`}
-                                    name={`${element._id_slot}`}
+    <div className="PagePatientLookSlot">
+      <Layout>
+        <div className="Container">
+          {dataParse.map((element: any, index: any) => {
+            return (
+              <div className="Element" key={index}>
+                <div className="Doctor">
+                  <br />
+                  <br />
+                  <br />
+                  <strong>{element.category}</strong>
+                  <br />
+                  <br />
+                  <strong>{element.lastName}</strong>
+                </div>
+                <br />
+                <div className="Unknow">
+                  {element.Slot.map((element: any, index: any) => {
+                    return (
+                      <div key={index} id={element._id_date}>
+                        <strong>{element.date}</strong>
+                        <br />
+                        <br />
+                        {element.hours === undefined || null ? (
+                          <>No slots available</>
+                        ) : (
+                          element.hours.map((element: any, index: any) => {
+                            return (
+                              <div className="Container" key={index}>
+                                {element.avalaible === true ? (
+                                  <form
+                                    method="POST"
+                                    action={`/api/mongodb/addPatient?index=${index}&id=${element.id}`}
                                   >
-                                    {element.hours}
-                                  </button>
-                                </form>
-                              </>
-                            )}
-                          </div>
-                        );
-                      })
-                    )}
-                  </div>
-                );
-              })}
-            </div>
-          );
-        })}
-      </div>
-    </Layout>
+                                    <button
+                                      className="btn btn-outline-dark my-2 my-sm-0"
+                                      id={`${element._id_slot}`}
+                                      name={`${element._id_slot}`}
+                                    >
+                                      {element.hours}
+                                    </button>
+                                  </form>
+                                ) : (
+                                  <>
+                                    {" "}
+                                    <form
+                                      method="POST"
+                                      action={`/api/mongodb/addPatient?index=${index}`}
+                                    >
+                                      <button
+                                        disabled={element.available === false}
+                                        className="btn btn-outline-dark my-2 my-sm-0"
+                                        id={`${element._id_slot}`}
+                                        name={`${element._id_slot}`}
+                                      >
+                                        {element.hours}
+                                      </button>
+                                      <br />
+                                      <br />
+                                    </form>
+                                    <br />
+                                    <br />
+                                  </>
+                                )}
+                              </div>
+                            );
+                          })
+                        )}
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      </Layout>
+    </div>
   );
 }
