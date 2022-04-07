@@ -1,14 +1,14 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import { getDatabase } from "../../../src/database";
 import cookie from "cookie";
+import { getCookies } from "cookies-next";
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
   if (req.method === "GET" || "POST") {
-    console.log("coucou");
     const queryCode = req.query.code;
-
+    const cookies = { cookie: getCookies({ req, res }) };
     const auth0 = await fetch(`${process.env.AUTH0_TOKEN}`, {
       method: "POST",
       headers: { "Content-type": "application/x-www-form-urlencoded" },
@@ -18,7 +18,8 @@ export default async function handler(
       .then((token) => token);
     const tokenAccess = auth0.access_token;
     const tokenId = auth0.id_token;
-    res.setHeader("Set-Cookie", [
+    const Slot = cookies.cookie.Slot;
+    const cookieSlot = res.setHeader("Set-Cookie", [
       cookie.serialize("AccessTokenPatient", tokenAccess, {
         httpOnly: true,
         secure: process.env.NODE_ENV !== "development",
@@ -34,8 +35,12 @@ export default async function handler(
         path: "/",
       }),
     ]);
-
-    res.redirect("/");
+    console.log(Slot);
+    if (Slot == undefined) {
+      res.redirect("/");
+    } else {
+      res.redirect("/PatientForm");
+    }
   } else {
     res.statusCode = 405;
     res.end();

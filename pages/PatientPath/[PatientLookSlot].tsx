@@ -37,7 +37,7 @@ export default function LoginDoctor({ data }: any) {
               <br></br>
               {element.Slot.map((element: any, index: any) => {
                 return (
-                  <div key={index}>
+                  <div key={index} id={element._id_date}>
                     {element.date}
 
                     {element.hours === undefined || null ? (
@@ -49,11 +49,12 @@ export default function LoginDoctor({ data }: any) {
                             {element.avalaible === true ? (
                               <form
                                 method="POST"
-                                action="/api/mongodb/updatePatient"
+                                action={`/api/mongodb/addPatient?index=${index}`}
                               >
                                 <button
                                   className="btn btn-outline-dark my-2 my-sm-0"
-                                  id={element._id_slot}
+                                  id={`${element._id_slot}`}
+                                  name={`${element._id_slot}`}
                                 >
                                   {element.hours}
                                 </button>
@@ -63,12 +64,13 @@ export default function LoginDoctor({ data }: any) {
                                 {" "}
                                 <form
                                   method="POST"
-                                  action="/api/mongodb/updatePatient"
+                                  action={`/api/mongodb/addPatient?index=${index}`}
                                 >
                                   <button
                                     disabled={element.available === false}
                                     className="btn btn-outline-dark my-2 my-sm-0"
-                                    id={element._id_slot}
+                                    id={`${element._id_slot}`}
+                                    name={`${element._id_slot}`}
                                   >
                                     {element.hours}
                                   </button>

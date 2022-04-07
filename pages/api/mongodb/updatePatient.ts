@@ -1,26 +1,165 @@
 import { getCookies } from "cookies-next";
-import { ObjectID, ObjectId } from "mongodb";
+import { ObjectId } from "mongodb";
+
 import type { NextApiRequest, NextApiResponse } from "next";
 import { getDatabase } from "../../../src/database";
-import { v4 as uuidv4 } from "uuid";
+
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
   if (req.method === "POST" || "GET") {
-    const result = req.body;
-
-    const idButtonArray = Object.keys(result);
-    const idButton = idButtonArray[0];
     const mongodb = await getDatabase();
-    const searchDb = await mongodb
+    const cookies = { cookie: getCookies({ req, res }) };
+    const AccessTokenPatient = cookies.cookie.AccessTokenPatient;
+    const searchIdRdvButton = cookies.cookie.Slot;
+    const SplitSlot = searchIdRdvButton.split(",");
+    const idSlot = SplitSlot[0];
+    const indexSlot = SplitSlot[1];
+
+    const auth0searchUser = await fetch(
+      `https://${process.env.AUTH0_DOMAIN}/userinfo`,
+      {
+        method: "Post",
+        headers: {
+          Authorization: `Bearer ${AccessTokenPatient}`,
+        },
+      }
+    ).then((data) => data.json());
+
+    const mailUserAuth0 = auth0searchUser.email;
+
+    const searchIfAlreadyhere = await mongodb
+      .db()
+      .collection("Patients")
+      .findOne({ email: mailUserAuth0 });
+    const searchforInputrdv = await mongodb
       .db()
       .collection("Doctors")
-      .findOne({ "Slot.id": new ObjectId(idButton) })
-      .then((data) => data?.Slot);
+      .findOne({
+        "Slot.hours._id_slot": new ObjectId(idSlot),
+      });
+
+    const categoryDoc = searchforInputrdv?.category;
+    const nameDoc = searchforInputrdv?.firstName;
+    const lastNameDoc = searchforInputrdv?.lastName;
+    const cityDoc = searchforInputrdv?.city;
+    const specialityDoc = searchforInputrdv?.speciality;
+    const searchSlotByHours = searchforInputrdv?.Slot;
+
+    console.log(searchSlotByHours);
+
+    const newPatient = {
+      category: "Patient",
+      firstName: req.body.firstName,
+      lastName: req.body.lastName,
+      email: mailUserAuth0,
+      city: req.body.city,
+      phone: req.body.phone,
+      // appointments: {
+      //   $push: {
+      //     Appointments: {
+      //       id: idSlot,
+      //       category: categoryDoc,
+      //       firstName: nameDoc,
+      //       lastName: lastNameDoc,
+      //       city: cityDoc,
+      //       speciality: specialityDoc,
+      //     },
+      //   },
+      // },
+    };
+    if (searchIfAlreadyhere === null) {
+      const addPatient = await mongodb
+        .db()
+        .collection("Patients")
+        .insertOne(newPatient);
+
+      if (indexSlot === "0") {
+        const searchDbDoctorIdRdv = await mongodb
+          .db()
+          .collection("Doctors")
+          .updateOne(
+            {
+              "Slot.hours._id_slot": new ObjectId(idSlot),
+            },
+            {
+              $set: { "Slot.$.hours.0.available": false },
+            }
+          );
+
+        res.redirect("/ConfirmSlot");
+      } else if (indexSlot === "1") {
+        const searchDbDoctorIdRdv = await mongodb
+          .db()
+          .collection("Doctors")
+          .updateOne(
+            {
+              "Slot.hours._id_slot": new ObjectId(idSlot),
+            },
+            {
+              $set: { "Slot.$.hours.1.available": false },
+            }
+          );
+        res.redirect("/ConfirmSlot");
+      } else if (indexSlot === "2") {
+        const searchDbDoctorIdRdv = await mongodb
+          .db()
+          .collection("Doctors")
+          .updateOne(
+            {
+              "Slot.hours._id_slot": new ObjectId(idSlot),
+            },
+            {
+              $set: { "Slot.$.hours.2.available": false },
+            }
+          );
+        res.redirect("/ConfirmSlot");
+      } else if (indexSlot === "3") {
+        const searchDbDoctorIdRdv = await mongodb
+          .db()
+          .collection("Doctors")
+          .updateOne(
+            {
+              "Slot.hours._id_slot": new ObjectId(idSlot),
+            },
+            {
+              $set: { "Slot.$.hours.3.available": false },
+            }
+          );
+        res.redirect("/ConfirmSlot");
+      } else if (indexSlot === "4") {
+        const searchDbDoctorIdRdv = await mongodb
+          .db()
+          .collection("Doctors")
+          .updateOne(
+            {
+              "Slot.hours._id_slot": new ObjectId(idSlot),
+            },
+            {
+              $set: { "Slot.$.hours.4.available": false },
+            }
+          );
+        res.redirect("/ConfirmSlot");
+      } else {
+        const searchDbDoctorIdRdv = await mongodb
+          .db()
+          .collection("Doctors")
+          .updateOne(
+            {
+              "Slot.hours._id_slot": new ObjectId(idSlot),
+            },
+            {
+              $set: { "Slot.$.hours.5.available": false },
+            }
+          );
+        res.redirect("/ConfirmSlot");
+      }
+    } else {
+      res.status(200).redirect("/");
+    }
   } else {
     res.redirect("/");
-
     res.end();
   }
 }
