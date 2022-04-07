@@ -84,45 +84,49 @@ const Layout: React.FC = ({ children }: any) => {
               className="collapse navbar-collapse"
               id="navbarSupportedContent"
             ></div>
-            {!cookiePatient ? (
-              <Link href="/api/auth/login" passHref={true}>
-                <button
-                  className="btn btn-outline-dark my-2 my-sm-0"
-                  type="submit"
-                >
-                  <a>Login as Patient</a>
-                </button>
-              </Link>
-            ) : (
-              <Link href="/api/auth/logout" passHref={true}>
-                <button
-                  className="btn btn-outline-dark my-2 my-sm-0"
-                  type="submit"
-                >
-                  <a>Logout</a>
-                </button>
-              </Link>
-            )}
-            {!cookieDoctor ? (
-              <Link href="/api/auth/loginDoc" key={"idDoc"} passHref={true}>
-                <button
-                  className="btn btn-outline-dark my-2 my-sm-0"
-                  type="submit"
-                  id="LogDoc"
-                >
-                  <a>Are you a Doctor ? </a>
-                </button>
-              </Link>
-            ) : (
-              <Link href="/api/auth/logoutDoc" passHref={true}>
-                <button
-                  className="btn btn-outline-dark my-2 my-sm-0"
-                  type="submit"
-                >
-                  <a>Logout</a>
-                </button>
-              </Link>
-            )}
+            <div>
+              {!cookiePatient ? (
+                <Link href="/api/auth/login" passHref={true}>
+                  <button
+                    className="btn btn-outline-white my-2 my-sm-0"
+                    type="submit"
+                  >
+                    <a>Login as Patient</a>
+                  </button>
+                </Link>
+              ) : (
+                <Link href="/api/auth/logout" passHref={true}>
+                  <button
+                    className="btn btn-outline-white my-2 my-sm-0"
+                    type="submit"
+                  >
+                    <a>Logout</a>
+                  </button>
+                </Link>
+              )}
+            </div>
+            <div>
+              {!cookieDoctor ? (
+                <Link href="/api/auth/loginDoc" key={"idDoc"} passHref={true}>
+                  <button
+                    className="btn btn-outline-white my-2 my-sm-0"
+                    type="submit"
+                    id="LogDoc"
+                  >
+                    <a>Are you a Doctor ? </a>
+                  </button>
+                </Link>
+              ) : (
+                <Link href="/api/auth/logoutDoc" passHref={true}>
+                  <button
+                    className="btn btn-outline-white my-2 my-sm-0"
+                    type="submit"
+                  >
+                    <a>Logout</a>
+                  </button>
+                </Link>
+              )}
+            </div>
           </div>
         </nav>
         {children}
