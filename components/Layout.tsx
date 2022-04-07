@@ -2,6 +2,7 @@ import Head from "next/head";
 import React from "react";
 import Link from "next/link";
 import { cp } from "fs/promises";
+import Image from "next/image";
 
 const Layout: React.FC = ({ children }: any) => {
   const [cookiePatient, setCookie] = React.useState<any>("");
@@ -43,7 +44,13 @@ const Layout: React.FC = ({ children }: any) => {
         <nav className="navbar navbar-expand-lg navbar-primary bg-primary">
           <div className="container-fluid">
             <Link href="/">
-              <a className="navbar-brand user-select-none">Doctolib</a>
+              {/* <a className="navbar-brand user-select-none">Doctolib</a> */}
+              <Image
+                src="/logoDoctolib.png"
+                width={120}
+                height={50}
+                alt="logoDoctolib"
+              />
             </Link>
 
             <button
