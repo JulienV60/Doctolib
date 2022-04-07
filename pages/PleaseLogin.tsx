@@ -6,11 +6,9 @@ import Link from "next/link";
 export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
   const cookies = { cookie: getCookies({ req, res }) };
   const slot = JSON.stringify(cookies.cookie.Slot);
-  const test = JSON.stringify(cookies.cookie.Slot);
 
   return {
     props: {
-      data: test,
       cookie: slot,
     },
   };

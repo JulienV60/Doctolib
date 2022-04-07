@@ -20,8 +20,7 @@ export default async function handler(
       .then((token) => token);
     const tokenAccess = auth0.access_token;
     const tokenId = auth0.id_token;
-    let response = await fetch(`http://localhost:3000/api/cookie`);
-    response = await response.json().then((data) => data.cookie.Slot);
+
     const cookieSlot = res.setHeader("Set-Cookie", [
       cookie.serialize("AccessTokenPatient", tokenAccess, {
         httpOnly: true,
