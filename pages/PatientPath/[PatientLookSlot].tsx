@@ -49,7 +49,7 @@ export default function LoginDoctor({ data }: any) {
                             {element.avalaible === true ? (
                               <form
                                 method="POST"
-                                action={`/api/mongodb/addPatient?index=${index}`}
+                                action={`/api/mongodb/addPatient?index=${index}&id=${element.id}`}
                               >
                                 <button
                                   className="btn btn-outline-dark my-2 my-sm-0"
