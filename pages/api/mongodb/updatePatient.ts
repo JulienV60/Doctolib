@@ -36,7 +36,7 @@ export default async function Handler(
       .db()
       .collection("Patients")
       .findOne({ email: mailUserAuth0 });
-    console.log(searchIfAlreadyhere);
+
     const searchforInputrdv = await mongodb
       .db()
       .collection("Doctors")
