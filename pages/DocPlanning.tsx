@@ -11,11 +11,6 @@ const MyAgenda = () => {
         <div className="App">
           <hr className="k-my-8" />
           <Scheduler />
-          <Link href="/api/auth/logout" passHref={true}>
-            <button className="btn btn-outline-dark my-2 my-sm-0" type="submit">
-              <a>Logout</a>
-            </button>
-          </Link>
         </div>
       </div>
     </Layout>
