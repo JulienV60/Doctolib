@@ -4,7 +4,7 @@ import { ObjectId } from "mongodb";
 import type { NextApiRequest, NextApiResponse } from "next";
 import { getDatabase } from "../../../src/database";
 
-export default async function handler(
+export default async function Handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
@@ -14,6 +14,7 @@ export default async function handler(
     const AccessTokenPatient = cookies.cookie.AccessTokenPatient;
     const searchIdRdvButton = cookies.cookie.Slot;
     const SplitSlot = searchIdRdvButton.split(",");
+
     const idSlot = SplitSlot[0];
     const indexSlot = SplitSlot[1];
 
@@ -39,13 +40,34 @@ export default async function handler(
       .findOne({
         "Slot.hours._id_slot": new ObjectId(idSlot),
       });
-    console.log(searchIdRdvButton[0]);
+    console.log("id slot : ", idSlot);
     const categoryDoc = searchforInputrdv?.category;
     const nameDoc = searchforInputrdv?.firstName;
     const lastNameDoc = searchforInputrdv?.lastName;
     const cityDoc = searchforInputrdv?.city;
     const specialityDoc = searchforInputrdv?.speciality;
-    const searchSlotByHours = searchforInputrdv?.Slot;
+    const findDateObject = searchforInputrdv?.Slot.filter(
+      (date: any) => {
+        return date.hours.filter(
+          (slot: any) => {
+            return slot._id_slot.toString() === idSlot;
+          }
+          ).length > 0
+        }
+        );
+    const appointmentDate = findDateObject[0].date;
+    console.log("test date", appointmentDate);
+
+    const findSlotObject = findDateObject[0].hours.filter(
+      (slot: any) => {
+        return slot._id_slot.toString() === idSlot;
+      }
+    );
+    const patientSlot = findSlotObject[0].hours;
+    console.log("slot : ", patientSlot);
+
+
+    // console.log("test slot", appointmentDate);
 
     const newPatient = {
       category: "Patient",
@@ -54,18 +76,20 @@ export default async function handler(
       email: mailUserAuth0,
       city: req.body.city,
       phone: req.body.phone,
-      // appointments: {
-      //   $push: {
-      //     Appointments: {
-      //       id: idSlot,
-      //       category: categoryDoc,
-      //       firstName: nameDoc,
-      //       lastName: lastNameDoc,
-      //       city: cityDoc,
-      //       speciality: specialityDoc,
-      //     },
-      //   },
-      // },
+      appointments: {
+        $push: {
+          Appointments: {
+            id: idSlot,
+            category: categoryDoc,
+            firstName: nameDoc,
+            lastName: lastNameDoc,
+            city: cityDoc,
+            speciality: specialityDoc,
+            date : appointmentDate,
+            slot : patientSlot,
+          },
+        },
+      },
     };
     if (searchIfAlreadyhere === null) {
       const addPatient = await mongodb
