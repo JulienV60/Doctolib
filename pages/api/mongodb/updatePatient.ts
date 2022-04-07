@@ -398,7 +398,326 @@ export default async function Handler(
         res.redirect("/ConfirmSlot");
       }
     } else {
-      res.redirect("/");
+      if (indexSlot === "0") {
+        const searchDbDoctorIdRdv = await mongodb
+          .db()
+          .collection("Doctors")
+          .updateOne(
+            {
+              "Slot.hours._id_slot": new ObjectId(idSlot),
+            },
+            {
+              $set: { "Slot.$.hours.0.available": false },
+            }
+          );
+        const insertPatientinDbDoctors = await mongodb
+          .db()
+          .collection("Doctors")
+          .updateOne(
+            {
+              email: mailDoc,
+            },
+            {
+              $push: {
+                Reserved: {
+                  id: indexSlot,
+                  name: req.body.firstName,
+                  date: appointmentDate,
+                  email: mailUserAuth0,
+                  phone: req.body.phone,
+                  slot: patientSlot,
+                },
+              },
+            }
+          );
+        const dbPatientUpdate = await mongodb
+          .db()
+          .collection("Patients")
+          .updateOne(
+            { email: mailUserAuth0 },
+            {
+              $push: {
+                Appointments: {
+                  id: idSlot,
+                  category: categoryDoc,
+                  firstName: nameDoc,
+                  lastName: lastNameDoc,
+                  city: cityDoc,
+                  speciality: specialityDoc,
+                  date: appointmentDate,
+                  slot: patientSlot,
+                },
+              },
+            }
+          );
+
+        res.redirect("/ConfirmSlot");
+      } else if (indexSlot === "1") {
+        const searchDbDoctorIdRdv = await mongodb
+          .db()
+          .collection("Doctors")
+          .updateOne(
+            {
+              "Slot.hours._id_slot": new ObjectId(idSlot),
+            },
+            {
+              $set: { "Slot.$.hours.1.available": false },
+            }
+          );
+        const insertPatientinDbDoctors = await mongodb
+          .db()
+          .collection("Doctors")
+          .updateOne(
+            {
+              email: mailDoc,
+            },
+            {
+              $push: {
+                Reserved: {
+                  id: indexSlot,
+                  name: req.body.firstName,
+                  date: appointmentDate,
+                  email: mailUserAuth0,
+                  phone: req.body.phone,
+                  slot: patientSlot,
+                },
+              },
+            }
+          );
+        const dbPatientUpdate = await mongodb
+          .db()
+          .collection("Patients")
+          .updateOne(
+            { email: mailUserAuth0 },
+            {
+              $push: {
+                Appointments: {
+                  id: idSlot,
+                  category: categoryDoc,
+                  firstName: nameDoc,
+                  lastName: lastNameDoc,
+                  city: cityDoc,
+                  speciality: specialityDoc,
+                  date: appointmentDate,
+                  slot: patientSlot,
+                },
+              },
+            }
+          );
+        res.redirect("/ConfirmSlot");
+      } else if (indexSlot === "2") {
+        const searchDbDoctorIdRdv = await mongodb
+          .db()
+          .collection("Doctors")
+          .updateOne(
+            {
+              "Slot.hours._id_slot": new ObjectId(idSlot),
+            },
+            {
+              $set: { "Slot.$.hours.2.available": false },
+            }
+          );
+        const insertPatientinDbDoctors = await mongodb
+          .db()
+          .collection("Doctors")
+          .updateOne(
+            {
+              email: mailDoc,
+            },
+            {
+              $push: {
+                Reserved: {
+                  id: indexSlot,
+                  name: req.body.firstName,
+                  date: appointmentDate,
+                  email: mailUserAuth0,
+                  phone: req.body.phone,
+                  slot: patientSlot,
+                },
+              },
+            }
+          );
+        const dbPatientUpdate = await mongodb
+          .db()
+          .collection("Patients")
+          .updateOne(
+            { email: mailUserAuth0 },
+            {
+              $push: {
+                Appointments: {
+                  id: idSlot,
+                  category: categoryDoc,
+                  firstName: nameDoc,
+                  lastName: lastNameDoc,
+                  city: cityDoc,
+                  speciality: specialityDoc,
+                  date: appointmentDate,
+                  slot: patientSlot,
+                },
+              },
+            }
+          );
+        res.redirect("/ConfirmSlot");
+      } else if (indexSlot === "3") {
+        const searchDbDoctorIdRdv = await mongodb
+          .db()
+          .collection("Doctors")
+          .updateOne(
+            {
+              "Slot.hours._id_slot": new ObjectId(idSlot),
+            },
+            {
+              $set: { "Slot.$.hours.3.available": false },
+            }
+          );
+        const insertPatientinDbDoctors = await mongodb
+          .db()
+          .collection("Doctors")
+          .updateOne(
+            {
+              email: mailDoc,
+            },
+            {
+              $push: {
+                Reserved: {
+                  id: indexSlot,
+                  name: req.body.firstName,
+                  date: appointmentDate,
+                  email: mailUserAuth0,
+                  phone: req.body.phone,
+                  slot: patientSlot,
+                },
+              },
+            }
+          );
+        const dbPatientUpdate = await mongodb
+          .db()
+          .collection("Patients")
+          .updateOne(
+            { email: mailUserAuth0 },
+            {
+              $push: {
+                Appointments: {
+                  id: idSlot,
+                  category: categoryDoc,
+                  firstName: nameDoc,
+                  lastName: lastNameDoc,
+                  city: cityDoc,
+                  speciality: specialityDoc,
+                  date: appointmentDate,
+                  slot: patientSlot,
+                },
+              },
+            }
+          );
+        res.redirect("/ConfirmSlot");
+      } else if (indexSlot === "4") {
+        const searchDbDoctorIdRdv = await mongodb
+          .db()
+          .collection("Doctors")
+          .updateOne(
+            {
+              "Slot.hours._id_slot": new ObjectId(idSlot),
+            },
+            {
+              $set: { "Slot.$.hours.4.available": false },
+            }
+          );
+        const insertPatientinDbDoctors = await mongodb
+          .db()
+          .collection("Doctors")
+          .updateOne(
+            {
+              email: mailDoc,
+            },
+            {
+              $push: {
+                Reserved: {
+                  id: indexSlot,
+                  name: req.body.firstName,
+                  date: appointmentDate,
+                  email: mailUserAuth0,
+                  phone: req.body.phone,
+                  slot: patientSlot,
+                },
+              },
+            }
+          );
+        const dbPatientUpdate = await mongodb
+          .db()
+          .collection("Patients")
+          .updateOne(
+            { email: mailUserAuth0 },
+            {
+              $push: {
+                Appointments: {
+                  id: idSlot,
+                  category: categoryDoc,
+                  firstName: nameDoc,
+                  lastName: lastNameDoc,
+                  city: cityDoc,
+                  speciality: specialityDoc,
+                  date: appointmentDate,
+                  slot: patientSlot,
+                },
+              },
+            }
+          );
+        res.redirect("/ConfirmSlot");
+      } else {
+        const searchDbDoctorIdRdv = await mongodb
+          .db()
+          .collection("Doctors")
+          .updateOne(
+            {
+              "Slot.hours._id_slot": new ObjectId(idSlot),
+            },
+            {
+              $set: { "Slot.$.hours.5.available": false },
+            }
+          );
+        const insertPatientinDbDoctors = await mongodb
+          .db()
+          .collection("Doctors")
+          .updateOne(
+            {
+              email: mailDoc,
+            },
+            {
+              $push: {
+                Reserved: {
+                  id: indexSlot,
+                  name: req.body.firstName,
+                  date: appointmentDate,
+                  email: mailUserAuth0,
+                  phone: req.body.phone,
+                  slot: patientSlot,
+                },
+              },
+            }
+          );
+        const dbPatientUpdate = await mongodb
+          .db()
+          .collection("Patients")
+          .updateOne(
+            { email: mailUserAuth0 },
+            {
+              $push: {
+                Appointments: {
+                  id: idSlot,
+                  category: categoryDoc,
+                  firstName: nameDoc,
+                  lastName: lastNameDoc,
+                  city: cityDoc,
+                  speciality: specialityDoc,
+                  date: appointmentDate,
+                  slot: patientSlot,
+                },
+              },
+            }
+          );
+        res.redirect("/ConfirmSlot");
+      };
     }
   } else {
     res.redirect("/");

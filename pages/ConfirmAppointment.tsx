@@ -32,7 +32,7 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
     .toArray();
 
   const stringifyResult = JSON.stringify(filterdbPatient);
-
+  // const stringifyIdSlot = JSON.stringify(idSlot);
   return {
     props: {
       data: stringifyResult,
@@ -42,7 +42,7 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
 };
 
 
-export default function ConfirmSlot({ data, idSlot }: any) {
+export default function ConfirmAppointment({ data, idSlot }: any) {
   const result = JSON.parse(data);
 
   const findAppointment = result[0].Appointments.filter(
@@ -50,20 +50,22 @@ export default function ConfirmSlot({ data, idSlot }: any) {
       return appointment.id.toString() === idSlot;
     }
   )
+  console.log("find appointment", findAppointment);
+
+
 
   return (
     <div>
       <Layout>
-        <h2>Summury of your appointment</h2>
-          <h3>Check that all the details are correct</h3>
-          <h4>Your information</h4>
+        <h2>✅ Appointment confirmed</h2>
+          <h3>Patient details</h3>
             <ul>
               First name : {result[0].firstName}<br></br>
               Last name : {result[0].lastName}<br></br>
               Phone number : {result[0].phone}<br></br>
               Email address : {result[0].email}
             </ul>
-            <h4>Appointment information</h4>
+            <h4>Appointment details</h4>
             <ul>
               Doctor : {`${findAppointment[0].firstName} ${findAppointment[0].lastName}`}<br></br>
               Speciality : {findAppointment[0].speciality}<br></br>
@@ -71,9 +73,9 @@ export default function ConfirmSlot({ data, idSlot }: any) {
               Date : {findAppointment[0].date}<br></br>
               Time : {findAppointment[0].slot}
             </ul>
-            <form method="POST" action="/ConfirmAppointment">
+            <form method="POST" action="/PatientProfile">
             <button type="submit" id="test2">
-            <a> Confirm your appointment</a>
+            <a> My appointments </a>
           </button>
             </form>
       </Layout>

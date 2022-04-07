@@ -32,7 +32,7 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
     .toArray();
 
   const stringifyResult = JSON.stringify(filterdbPatient);
-
+  // const stringifyIdSlot = JSON.stringify(idSlot);
   return {
     props: {
       data: stringifyResult,
@@ -42,7 +42,7 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
 };
 
 
-export default function ConfirmSlot({ data, idSlot }: any) {
+export default function PatientProfile({ data, idSlot }: any) {
   const result = JSON.parse(data);
 
   const findAppointment = result[0].Appointments.filter(
@@ -54,26 +54,30 @@ export default function ConfirmSlot({ data, idSlot }: any) {
   return (
     <div>
       <Layout>
-        <h2>Summury of your appointment</h2>
-          <h3>Check that all the details are correct</h3>
-          <h4>Your information</h4>
+          <h3>My details</h3>
             <ul>
               First name : {result[0].firstName}<br></br>
               Last name : {result[0].lastName}<br></br>
               Phone number : {result[0].phone}<br></br>
               Email address : {result[0].email}
             </ul>
-            <h4>Appointment information</h4>
-            <ul>
-              Doctor : {`${findAppointment[0].firstName} ${findAppointment[0].lastName}`}<br></br>
-              Speciality : {findAppointment[0].speciality}<br></br>
-              Address : {findAppointment[0].city}<br></br>
-              Date : {findAppointment[0].date}<br></br>
-              Time : {findAppointment[0].slot}
-            </ul>
-            <form method="POST" action="/ConfirmAppointment">
+            <h4>Next appointments</h4>
+            {result[0].Appointments.map(
+              (appointment: any, index: any) => {
+                return <div key={index}>
+                  <ul>
+                  Name : {`${appointment.category} ${appointment.firstName} ${appointment.lastName} `}<br></br>
+                  Speciality : {appointment.speciality}<br></br>
+                  Date : {appointment.date} <br></br>
+                  Time : {appointment.slot} <br></br>
+                  </ul>
+                  </div>
+              }
+            )}
+
+            <form method="POST" action="/">
             <button type="submit" id="test2">
-            <a> Confirm your appointment</a>
+            <a> Back to home page </a>
           </button>
             </form>
       </Layout>

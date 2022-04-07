@@ -69,7 +69,7 @@ const Layout: React.FC = ({ children }: any) => {
             </Link>
 
             <button
-              className="navbar-toggler"
+              className="navbar-toggler btn-light"
               type="button"
               data-toggle="collapse"
               data-target="#navbarSupportedContent"
