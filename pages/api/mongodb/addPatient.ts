@@ -1,8 +1,5 @@
 import { getCookies } from "cookies-next";
-import { ObjectId } from "mongodb";
 import type { NextApiRequest, NextApiResponse } from "next";
-import app from "next/app";
-import { getDatabase } from "../../../src/database";
 import cookie from "cookie";
 
 export default async function handler(
@@ -11,10 +8,7 @@ export default async function handler(
 ) {
   const result = req.body;
   const resultdeux = req.query.index;
-
   const cookies = { cookie: getCookies({ req, res }) };
-  const mongodb = await getDatabase();
-
   const AccessTokenPatient = cookies.cookie.AccessTokenPatient;
   const idButtonArray = Object.keys(result);
   const idButton = `${idButtonArray[0]},${resultdeux}`;

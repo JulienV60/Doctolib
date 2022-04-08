@@ -15,15 +15,11 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
 };
 export default function pleaseLogin({ data, cookie }: any) {
   const Slot = JSON.parse(cookie);
-
   return (
     <div>
       <Link href={`/api/auth/login?slot=${Slot}`}>
         <a>Plz login</a>
       </Link>
-      {/* <form action={`/api/auth/login?slot=${Slot}`} method="GET">
-        <button> Plz login</button>
-      </form> */}
     </div>
   );
 }
