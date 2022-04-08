@@ -55,7 +55,8 @@ a {
 }
 
 .ConfirmSlot {
-  text-align: center;
+  text-align: left;
+  padding-left: 2rem;
 }
 
 .divPleaseLogin {
