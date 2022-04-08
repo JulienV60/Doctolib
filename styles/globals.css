@@ -70,7 +70,7 @@ a {
 }
 .App {
   text-align: center;
-=======
+}
 .form-group {
   text-align: center;
   display: flex;
@@ -78,5 +78,4 @@ a {
   justify-content: center;
   align-items: center;
   padding-top: 15rem;
-
 }
