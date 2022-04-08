@@ -16,10 +16,8 @@ export default async function Handler(
     const AccessTokenPatient = cookies.cookie.AccessTokenPatient;
     const searchIdRdvButton = cookies.cookie.Slot;
     const SplitSlot = searchIdRdvButton.split(",");
-
     const idSlot = SplitSlot[0];
     const indexSlot = SplitSlot[1];
-
     const auth0searchUser = await fetch(
       `https://${process.env.AUTH0_DOMAIN}/userinfo`,
       {
@@ -29,14 +27,11 @@ export default async function Handler(
         },
       }
     ).then((data) => data.json());
-
     const mailUserAuth0 = auth0searchUser.email;
-
     const searchIfAlreadyhere = await mongodb
       .db()
       .collection("Patients")
       .findOne({ email: mailUserAuth0 });
-
     const searchforInputrdv = await mongodb
       .db()
       .collection("Doctors")
@@ -50,6 +45,7 @@ export default async function Handler(
     const cityDoc = searchforInputrdv?.city;
     const specialityDoc = searchforInputrdv?.speciality;
     const mailDoc = searchforInputrdv?.email;
+
     const findDateObject = searchforInputrdv?.Slot.filter((date: any) => {
       return (
         date.hours.filter((slot: any) => {
