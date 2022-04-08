@@ -59,6 +59,7 @@ export default async function Handler(
           },
         }
       );
+    res.redirect("/DocForm");
   } else {
     res.status(200).redirect("/PleaseLoginDoc");
   }

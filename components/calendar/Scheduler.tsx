@@ -1,44 +1,29 @@
 import * as React from "react";
-import "@progress/kendo-theme-default/dist/all.css";
-import { Scheduler, DayView } from "@progress/kendo-react-scheduler";
-const displayDate = new Date("2019-08-26T21:00:00.000Z");
-const defaultData = [
-  {
-    id: 0,
-    title: "Move me to 10:30 AM",
-    start: new Date("2019-08-27T06:00:00.000Z"),
-    end: new Date("2019-08-27T06:30:00.000Z"),
-  },
-];
+import { Scheduler, DayView, WeekView } from "@progress/kendo-react-scheduler";
 
 const App = () => {
-  const [data, setData] = React.useState(defaultData);
-  const handleDataChange = React.useCallback(
-    ({ updated }) => {
-      setData((old) =>
-        old.map(
-          (item) =>
-            updated.find((current: any) => current.id === item.id) || item
-        )
-      );
-    },
-    [setData]
-  );
+  const [user, setUser] = React.useState<any>([]);
+  React.useEffect(() => {
+    async function fetchApi() {
+      let response = await fetch(`/api/agenda`).then((data) => data.json());
+      setUser(response);
+      console.log(response);
+    }
+    fetchApi();
+  }, []);
+  const displayDate = new Date();
+  const defaultData = user.map((e: any) => ({
+    id: e.index,
+    title: e.title,
+    start: new Date(e.start),
+    end: new Date(e.end),
+  }));
+
+  console.log(user);
   return (
-    <Scheduler
-      data={data}
-      onDataChange={handleDataChange}
-      defaultDate={displayDate}
-      editable={{
-        remove: false,
-        resize: false,
-        add: false,
-        edit: false,
-        select: false,
-        drag: true,
-      }}
-    >
+    <Scheduler data={defaultData} defaultDate={displayDate}>
       <DayView />
+      <WeekView />
     </Scheduler>
   );
 };

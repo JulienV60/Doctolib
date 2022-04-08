@@ -13,6 +13,9 @@ import {
 import Image from "next/image";
 import Footer from "../components/footer";
 import "../styles/Home.module.css";
+import SearchIcon from "@mui/icons-material/Search";
+
+import { AccessAlarm, ThreeDRotation } from "@mui/icons-material";
 
 const Home: NextPage = ({ data }: any) => {
   return (
@@ -68,7 +71,10 @@ const Home: NextPage = ({ data }: any) => {
                       type="submit"
                       id="LogDoc"
                     >
-                      <a>Search </a>
+                      <a>
+                        {" "}
+                        <SearchIcon />{" "}
+                      </a>
                     </Button>
                   </Col>
                 </InputGroup>

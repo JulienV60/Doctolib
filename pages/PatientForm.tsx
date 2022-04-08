@@ -15,7 +15,6 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
   const idSlot = SplitSlot[0];
   console.log("testidslot1", idSlot);
 
-
   const auth0searchUser = await fetch(
     `https://${process.env.AUTH0_DOMAIN}/userinfo`,
     {
@@ -38,16 +37,14 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
   return {
     props: {
       data: stringifyResult,
-      idSlot : idSlot,
+      idSlot: idSlot,
     },
   };
 };
 
-
-
 export default function formPatient({ data, idSlot }: any) {
   const result = JSON.parse(data);
-  console.log("test result", result)
+  console.log("test result", result);
 
   // const findAppointment = result[0].Appointments.filter(
   //   (appointment: any) => {
@@ -55,14 +52,13 @@ export default function formPatient({ data, idSlot }: any) {
   //   }
   // )
 
-
   return (
     <Layout>
-      <div>
+      <div className="form-group">
         <form method="POST" action="/api/mongodb/updatePatient">
           <h1>Who is the appointment for ? </h1>
           <input
-            className=".form-control"
+            className="form-control"
             id="firstName"
             type="text"
             placeholder="First Name"
@@ -70,28 +66,28 @@ export default function formPatient({ data, idSlot }: any) {
           ></input>
 
           <input
-            className=".form-control"
+            className="form-control"
             id="lastName"
             type="text"
-            placeholder= "Last Name"
+            placeholder="Last Name"
             name="lastName"
           ></input>
 
           <input
-            className=".form-control"
+            className="form-control"
             id="city"
             type="text"
             placeholder="City"
             name="city"
           ></input>
           <input
-            className=".form-control"
+            className="form-control"
             id="speciality"
             type="text"
             placeholder="Phone"
             name="phone"
           ></input>
-          <button type="submit" id="test2">
+          <button className="btn btn-primary" type="submit" id="test2">
             <a> Confirm your details</a>
           </button>
         </form>
