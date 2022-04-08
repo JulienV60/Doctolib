@@ -9,6 +9,10 @@ export default async function handler(
   const cookies = { cookie: getCookies({ req, res }) };
   const AccessTokenDoc = cookies.cookie.AccessTokenDoc;
 
+  console.log("cookies", cookies);
+
+  console.log("accessTokenDoc", AccessTokenDoc)
+
   const auth0searchUser = await fetch(
     `https://${process.env.AUTH0_DOMAIN}/userinfo`,
     {
@@ -20,6 +24,8 @@ export default async function handler(
   ).then((data) => data.json());
 
   const mailUserAuth0 = auth0searchUser.email;
+  console.log("emailuser", mailUserAuth0);
+
   const mongodb = await getDatabase();
   const newDoctor = {
     category: "Doctor",
@@ -29,6 +35,8 @@ export default async function handler(
     city: req.body.city,
     speciality: req.body.speciality,
   };
+  console.log("newDoctor", newDoctor);
+
   const searchIfAlreadyhere = await mongodb
     .db()
     .collection("Doctors")
