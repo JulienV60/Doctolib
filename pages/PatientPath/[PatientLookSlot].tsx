@@ -29,7 +29,6 @@ export default function LoginDoctor({ data }: any) {
   // });
   console.log(dataParse);
 
-
   return (
     <div className="PagePatientLookSlot">
       <Layout>
@@ -41,10 +40,9 @@ export default function LoginDoctor({ data }: any) {
               <div className="Element" key={index}>
                 <div className="Doctor">
                   <br />
-                  <br />
-                  <br />
+
                   <strong>{element.category}</strong>
-                  <br />
+
                   <br />
                   <strong>{element.lastName}</strong>
                 </div>
@@ -108,13 +106,11 @@ export default function LoginDoctor({ data }: any) {
               </div>
             );
           })}
-        {/* }else {
+          {/* }else {
           return (
             <p>No doctors available for your research</p>
           )
-        }}} */
-        }
-
+        }}} */}
         </div>
       </Layout>
     </div>
