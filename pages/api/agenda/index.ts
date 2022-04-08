@@ -41,6 +41,5 @@ export default async function handler(
       }:00:00 GMT+0200 (heure d’été d’Europe centrale)`,
     };
   });
-
   res.end(JSON.stringify(findReserved));
 }

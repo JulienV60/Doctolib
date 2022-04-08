@@ -1,8 +1,6 @@
 import Layout from "../components/Layout";
 import React, { useState } from "react";
 import Link from "next/link";
-import { MultiSelect } from "react-multi-select-component";
-import { Form, Button } from "react-bootstrap";
 import DateRangeIcon from "@mui/icons-material/DateRange";
 import ViewAgendaIcon from "@mui/icons-material/ViewAgenda";
 export default function FormDoc() {
@@ -48,6 +46,7 @@ export default function FormDoc() {
           </button>
         </form>
       </div>
+      <br />
       <Link href="/DocAddingSlot" passHref={true}>
         <button className="btn btn-primary">
           <a>
