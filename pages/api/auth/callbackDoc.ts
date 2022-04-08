@@ -33,5 +33,5 @@ export default async function handler(
     }),
   ]);
 
-  res.redirect("/DocForm");
+  res.redirect(303, "/DocForm");
 }

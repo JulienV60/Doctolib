@@ -25,8 +25,8 @@ export default async function handler(
   );
 
   if (AccessTokenPatient == undefined || null) {
-    res.redirect("/PleaseLogin");
+    res.redirect(303, "/PleaseLogin");
   } else {
-    res.redirect("/PatientForm");
+    res.redirect(303, "/PatientForm");
   }
 }

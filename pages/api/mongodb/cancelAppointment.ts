@@ -2,7 +2,6 @@ import { getCookies } from "cookies-next";
 import { GetServerSideProps, NextApiRequest, NextApiResponse } from "next";
 import { getDatabase } from "../../../src/database";
 
-
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
@@ -37,16 +36,15 @@ export default async function handler(
     );
     console.log("appointmnt obj", findAppointmentObject);
 
-
     const findDoctorId = findAppointmentObject[0].idDoc;
-    console.log("DocId", findDoctorId)
+    console.log("DocId", findDoctorId);
 
-    const oneDoctor =  await mongodb
-    .db()
-    .collection("Doctors")
-    .findOne({ _id: findDoctorId });
+    const oneDoctor = await mongodb
+      .db()
+      .collection("Doctors")
+      .findOne({ _id: findDoctorId });
 
-    console.log("myDoc", oneDoctor)
+    console.log("myDoc", oneDoctor);
 
     const myDoctorsAppointments = oneDoctor?.Reserved.filter(
       (appointment: any) => {
@@ -54,19 +52,14 @@ export default async function handler(
       }
     );
 
-    const newDoctor = {...oneDoctor, Reserved : myDoctorsAppointments}
+    const newDoctor = { ...oneDoctor, Reserved: myDoctorsAppointments };
 
     delete newDoctor._id;
 
     const removeAppointmentDoctor = mongodb
       .db()
       .collection("Doctors")
-      .updateOne(
-        {_id : findDoctorId},
-        {$set : newDoctor}
-      )
-
-
+      .updateOne({ _id: findDoctorId }, { $set: newDoctor });
 
     const findAppointment = filterdbPatient?.Appointments.filter(
       (appointment: any) => {
@@ -75,19 +68,17 @@ export default async function handler(
     );
 
     const newPatient = {
-      ...filterdbPatient, Appointments : findAppointment,
-    }
+      ...filterdbPatient,
+      Appointments: findAppointment,
+    };
     delete newPatient._id;
 
     const removeAppointmentPatient = mongodb
       .db()
       .collection("Patients")
-      .updateOne(
-        { email: mailUserAuth0 },
-        { $set : newPatient}
-      );
+      .updateOne({ email: mailUserAuth0 }, { $set: newPatient });
 
-    res.redirect("/PatientProfile");
+    res.redirect(303, "/PatientProfile");
   } else {
     res.statusCode = 405;
     res.end();

@@ -120,13 +120,13 @@ export default async function Handler(
                   date: appointmentDate,
                   slot: patientSlot,
                   email: mailDoc,
-                  idDoc : idDoc,
+                  idDoc: idDoc,
                 },
               },
             }
           );
 
-        res.redirect("/ConfirmSlot");
+        res.redirect(303, "/ConfirmSlot");
       } else if (indexSlot === "1") {
         const searchDbDoctorIdRdv = await mongodb
           .db()
@@ -176,12 +176,12 @@ export default async function Handler(
                   date: appointmentDate,
                   slot: patientSlot,
                   email: mailDoc,
-                  idDoc : idDoc,
+                  idDoc: idDoc,
                 },
               },
             }
           );
-        res.redirect("/ConfirmSlot");
+        res.redirect(303, "/ConfirmSlot");
       } else if (indexSlot === "2") {
         const searchDbDoctorIdRdv = await mongodb
           .db()
@@ -231,12 +231,12 @@ export default async function Handler(
                   date: appointmentDate,
                   slot: patientSlot,
                   email: mailDoc,
-                  idDoc : idDoc,
+                  idDoc: idDoc,
                 },
               },
             }
           );
-        res.redirect("/ConfirmSlot");
+        res.redirect(303, "/ConfirmSlot");
       } else if (indexSlot === "3") {
         const searchDbDoctorIdRdv = await mongodb
           .db()
@@ -286,12 +286,12 @@ export default async function Handler(
                   date: appointmentDate,
                   slot: patientSlot,
                   email: mailDoc,
-                  idDoc : idDoc,
+                  idDoc: idDoc,
                 },
               },
             }
           );
-        res.redirect("/ConfirmSlot");
+        res.redirect(303, "/ConfirmSlot");
       } else if (indexSlot === "4") {
         const searchDbDoctorIdRdv = await mongodb
           .db()
@@ -341,12 +341,12 @@ export default async function Handler(
                   date: appointmentDate,
                   slot: patientSlot,
                   email: mailDoc,
-                  idDoc : idDoc,
+                  idDoc: idDoc,
                 },
               },
             }
           );
-        res.redirect("/ConfirmSlot");
+        res.redirect(303, "/ConfirmSlot");
       } else {
         const searchDbDoctorIdRdv = await mongodb
           .db()
@@ -396,12 +396,12 @@ export default async function Handler(
                   date: appointmentDate,
                   slot: patientSlot,
                   email: mailDoc,
-                  idDoc : idDoc,
+                  idDoc: idDoc,
                 },
               },
             }
           );
-        res.redirect("/ConfirmSlot");
+        res.redirect(303, "/ConfirmSlot");
       }
     } else {
       if (indexSlot === "0") {
@@ -453,13 +453,13 @@ export default async function Handler(
                   date: appointmentDate,
                   slot: patientSlot,
                   email: mailDoc,
-                  idDoc : idDoc,
+                  idDoc: idDoc,
                 },
               },
             }
           );
 
-        res.redirect("/ConfirmSlot");
+        res.redirect(303, "/ConfirmSlot");
       } else if (indexSlot === "1") {
         const searchDbDoctorIdRdv = await mongodb
           .db()
@@ -509,12 +509,12 @@ export default async function Handler(
                   date: appointmentDate,
                   slot: patientSlot,
                   email: mailDoc,
-                  idDoc : idDoc,
+                  idDoc: idDoc,
                 },
               },
             }
           );
-        res.redirect("/ConfirmSlot");
+        res.redirect(303, "/ConfirmSlot");
       } else if (indexSlot === "2") {
         const searchDbDoctorIdRdv = await mongodb
           .db()
@@ -564,12 +564,12 @@ export default async function Handler(
                   date: appointmentDate,
                   slot: patientSlot,
                   email: mailDoc,
-                  idDoc : idDoc,
+                  idDoc: idDoc,
                 },
               },
             }
           );
-        res.redirect("/ConfirmSlot");
+        res.redirect(303, "/ConfirmSlot");
       } else if (indexSlot === "3") {
         const searchDbDoctorIdRdv = await mongodb
           .db()
@@ -619,12 +619,12 @@ export default async function Handler(
                   date: appointmentDate,
                   slot: patientSlot,
                   email: mailDoc,
-                  idDoc : idDoc,
+                  idDoc: idDoc,
                 },
               },
             }
           );
-        res.redirect("/ConfirmSlot");
+        res.redirect(303, "/ConfirmSlot");
       } else if (indexSlot === "4") {
         const searchDbDoctorIdRdv = await mongodb
           .db()
@@ -674,12 +674,12 @@ export default async function Handler(
                   date: appointmentDate,
                   slot: patientSlot,
                   email: mailDoc,
-                  idDoc : idDoc,
+                  idDoc: idDoc,
                 },
               },
             }
           );
-        res.redirect("/ConfirmSlot");
+        res.redirect(303, "/ConfirmSlot");
       } else {
         const searchDbDoctorIdRdv = await mongodb
           .db()
@@ -730,16 +730,16 @@ export default async function Handler(
                   date: appointmentDate,
                   slot: patientSlot,
                   email: mailDoc,
-                  idDoc : idDoc,
+                  idDoc: idDoc,
                 },
               },
             }
           );
-        res.redirect("/ConfirmSlot");
+        res.redirect(303, "/ConfirmSlot");
       }
     }
   } else {
-    res.redirect("/");
+    res.redirect(303, "/");
     res.end();
   }
 }

@@ -55,8 +55,8 @@ export default async function Handler(
           },
         }
       );
-    res.redirect("/DocForm");
+    res.redirect(303, "/DocForm");
   } else {
-    res.status(200).redirect("/PleaseLoginDoc");
+    res.status(200).redirect(303, "/PleaseLoginDoc");
   }
 }
