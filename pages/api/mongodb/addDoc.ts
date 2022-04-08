@@ -47,7 +47,7 @@ export default async function handler(
       .db()
       .collection("Doctors")
       .insertOne(newDoctor);
-    res.redirect("/DocForm");
+    res.redirect("/DocAddingSlot");
   } else {
     res.status(200).redirect("/api/auth/loginDoc");
   }
