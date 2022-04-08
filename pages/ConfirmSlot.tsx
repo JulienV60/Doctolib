@@ -50,7 +50,7 @@ export default function ConfirmSlot({ data, idSlot }: any) {
   return (
     <div>
       <Layout>
-        <div className="ConfirmSlot">
+        <div className="ConfirmSlot" style={{ lineHeight: "3rem" }}>
           <h2>Summury of your appointment</h2>
           <h3>Check that all the details are correct</h3>
           <div className="SlotConfirmation">

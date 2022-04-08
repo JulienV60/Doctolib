@@ -5,9 +5,11 @@ import Image from "next/image";
 import AccountCircle from "@mui/icons-material/AccountCircle";
 import LoginIcon from "@mui/icons-material/Login";
 import LogoutIcon from "@mui/icons-material/Logout";
+
 import HealthAndSafetyIcon from "@mui/icons-material/HealthAndSafety";
 const Layout: React.FC = ({ children }: any) => {
-  const [cookiePatient, setCookie] = React.useState<any>("");
+  const [cookiePatient, setCookiePatient] = React.useState<any>("");
+  const [cookieDoctor, setCookieDoctor] = React.useState<any>("");
 
   React.useEffect(() => {
     async function fetchApi() {
@@ -16,22 +18,11 @@ const Layout: React.FC = ({ children }: any) => {
         .json()
         .then((data) => data.cookie.AccessTokenPatient);
 
-      setCookie(response);
-    }
+      let result = await fetch(`/api/cookie`);
+      result = await result.json().then((data) => data.cookie.AccessTokenDoc);
 
-    fetchApi();
-  }, []);
-
-  const [cookieDoctor, setCookieDoctor] = React.useState<any>("");
-
-  React.useEffect(() => {
-    async function fetchApi() {
-      let response = await fetch(`/api/cookie`);
-      response = await response
-        .json()
-        .then((data) => data.cookie.AccessTokenDoc);
-
-      setCookieDoctor(response);
+      setCookiePatient(response);
+      setCookieDoctor(result);
     }
 
     fetchApi();
@@ -90,17 +81,20 @@ const Layout: React.FC = ({ children }: any) => {
               id="navbarSupportedContent"
             ></div>
             <div>
-              {!cookiePatient ? (
-                <Link href="/api/auth/login" passHref={true}>
-                  <button
-                    className="btn btn-outline-white my-2 my-sm-0"
-                    type="submit"
-                  >
-                    <a>
-                      <LoginIcon />
-                    </a>
-                  </button>
-                </Link>
+              {cookiePatient === undefined || null ? (
+                <div>
+                  <Link href="/api/auth/login" passHref={true}>
+                    <button
+                      className="btn btn-outline-white my-2 my-sm-0"
+                      type="submit"
+                    >
+                      <a>
+                        <LoginIcon />
+                        as Patient
+                      </a>
+                    </button>
+                  </Link>
+                </div>
               ) : (
                 <div>
                   <Link href="/api/auth/logout" passHref={true}>
@@ -128,21 +122,23 @@ const Layout: React.FC = ({ children }: any) => {
               )}
             </div>
             <div>
-              {!cookieDoctor ? (
-                <Link href="/api/auth/loginDoc" key={"idDoc"} passHref={true}>
-                  <button
-                    className="btn btn-outline-white my-2 my-sm-0"
-                    type="submit"
-                    id="LogDoc"
-                  >
-                    <a>
-                      <HealthAndSafetyIcon />
-                    </a>
-                  </button>
-                </Link>
+              {cookieDoctor === undefined || null ? (
+                <div>
+                  <Link href="/api/auth/loginDoc" key={"idDoc"} passHref={true}>
+                    <button
+                      className="btn btn-outline-white my-2 my-sm-0"
+                      type="submit"
+                      id="LogDoc"
+                    >
+                      <a>
+                        <HealthAndSafetyIcon />
+                      </a>
+                    </button>
+                  </Link>
+                </div>
               ) : (
                 <div>
-                  <Link href="/" passHref={true}>
+                  <Link href="/DocForm" passHref={true}>
                     <button
                       className="btn btn-outline-white my-2 my-sm-0"
                       type="submit"
