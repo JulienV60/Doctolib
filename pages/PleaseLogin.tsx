@@ -21,7 +21,7 @@ export default function pleaseLogin({ data, cookie }: any) {
     <Layout>
       <div className="divPleaseLogin">
         <h4>You are not logged in, please log in.</h4>
-        <br />
+
         <button>
           <Link href={`/api/auth/login?slot=${Slot}`}>
             <a>
