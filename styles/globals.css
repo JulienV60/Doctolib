@@ -54,7 +54,11 @@ a {
   margin: 2rem;
 }
 
+.ConfirmSlot {
+  text-align: center;
+
 .divPleaseLogin {
   margin: auto;
   padding: 10rem;
+
 }
