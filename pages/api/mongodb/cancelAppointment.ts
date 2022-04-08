@@ -41,9 +41,7 @@ export default async function handler(
       .db()
       .collection("Patients")
       .deleteOne(
-        { email: mailUserAuth0 },
-
-       ( Appointments.$.id: id )
+        { email: mailUserAuth0 }
 
         // { $unset: { Appointments: { id: { $elemMatch: { idString } } } } }
       );

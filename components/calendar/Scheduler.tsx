@@ -1,5 +1,12 @@
 import * as React from "react";
-import { Scheduler, DayView, WeekView } from "@progress/kendo-react-scheduler";
+import {
+  Scheduler,
+  DayView,
+  WeekView,
+  MonthView,
+  TimelineView,
+  AgendaView,
+} from "@progress/kendo-react-scheduler";
 
 const App = () => {
   const [user, setUser] = React.useState<any>([]);
@@ -12,18 +19,30 @@ const App = () => {
     fetchApi();
   }, []);
   const displayDate = new Date();
-  const defaultData = user.map((e: any) => ({
-    id: e.index,
+  const test = user.map((e: any) => ({
+    id: e.id,
     title: e.title,
-    start: new Date(e.start),
-    end: new Date(e.end),
+    start: new Date(e.start.toString()),
+    end: new Date(e.end.toString()),
   }));
+  console.log(test);
 
-  console.log(user);
+  const data = [
+    {
+      id: 0,
+      title: "Brast with Tom",
+      start: new Date("2022-04-08T08:30:00.000Z"),
+      end: new Date("2022-04-08T09:00:00.000Z"),
+    },
+  ];
+  console.log(data);
   return (
-    <Scheduler data={defaultData} defaultDate={displayDate}>
+    <Scheduler data={test} defaultDate={displayDate}>
+      <AgendaView />
+      <TimelineView />
       <DayView />
       <WeekView />
+      <MonthView />
     </Scheduler>
   );
 };
