@@ -38,8 +38,8 @@ export default async function handler(
   ]);
   const Slot = req.query.state;
   if (Slot == undefined || Slot == "undefined") {
-    res.redirect("/");
+    res.redirect(303, "/");
   } else {
-    res.redirect("/PatientForm");
+    res.redirect(303, "/PatientForm");
   }
 }

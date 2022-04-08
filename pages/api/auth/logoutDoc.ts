@@ -20,5 +20,5 @@ export default async function handler(
       path: "/",
     }),
   ]);
-  res.redirect(auth0);
+  res.redirect(303, auth0);
 }
