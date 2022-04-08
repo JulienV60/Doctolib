@@ -33,8 +33,12 @@ export default async function handler(
     return {
       id: index,
       title: e.name,
-      start: `${test}T${e.slot.split("-")[0].split(":")[0]}:00:00:000Z`,
-      end: `${test}T${e.slot.split("-")[1].split(":")[0]}:00:00:000Z`,
+      start: `${e.date} ${
+        e.slot.split("-")[0].split(":")[0]
+      }:00:00 GMT+0200 (heure d’été d’Europe centrale)`,
+      end: `${e.date} ${
+        e.slot.split("-")[1].split(":")[0]
+      }:00:00 GMT+0200 (heure d’été d’Europe centrale)`,
     };
   });
 

@@ -17,7 +17,6 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
 };
 export default function pleaseLogin({ data, cookie }: any) {
   const Slot = JSON.parse(cookie);
-
   return (
     <Layout>
       <div className="divPleaseLogin">
