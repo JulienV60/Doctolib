@@ -82,15 +82,23 @@ export default function PatientProfile({ data, idSlot }: any) {
                   Date : {appointment.date} <br></br>
                   Time : {appointment.slot} <br></br>
                 </ul>
+                <form
+                  method="POST"
+                  action={`/api/mongodb/cancelAppointment?id=${appointment.id}`}
+                >
+                  <button className="btn btn-primary">
+                    Cancel appointment
+                  </button>
+                </form>{" "}
+                <br></br> <br></br> <br></br>
+                <form method="GET" action="/">
+                  <button className="btn btn-primary" type="submit" id="Home">
+                    <a> Back to home page </a>
+                  </button>
+                </form>
               </div>
             );
           })}
-
-          <form method="POST" action="/">
-            <button type="submit" id="test2">
-              <a> Back to home page </a>
-            </button>
-          </form>
         </Layout>
       </div>
     );
@@ -107,7 +115,13 @@ export default function PatientProfile({ data, idSlot }: any) {
             Phone number : {result[0].phone}
             <br></br>
             Email address : {result[0].email}
-          </ul>
+          </ul>{" "}
+          <br></br> <br></br> <br></br>
+          <form method="GET" action="/">
+            <button className="btn btn-primary" type="submit" id="Home">
+              <a> Back to home page </a>
+            </button>
+          </form>
         </Layout>
       </div>
     );
