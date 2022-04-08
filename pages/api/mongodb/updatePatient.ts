@@ -1,8 +1,5 @@
-import { ObjectID } from "bson";
 import { getCookies } from "cookies-next";
-import { cp } from "fs";
 import { ObjectId } from "mongodb";
-
 import type { NextApiRequest, NextApiResponse } from "next";
 import { getDatabase } from "../../../src/database";
 
@@ -10,7 +7,7 @@ export default async function Handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  if (req.method === "POST" || "GET") {
+  if (req.method === "POST" || req.method === "GET") {
     const mongodb = await getDatabase();
     const cookies = { cookie: getCookies({ req, res }) };
     const AccessTokenPatient = cookies.cookie.AccessTokenPatient;
@@ -406,7 +403,6 @@ export default async function Handler(
           );
         res.redirect("/ConfirmSlot");
       }
-      res.redirect("/");
     } else {
       if (indexSlot === "0") {
         const searchDbDoctorIdRdv = await mongodb
@@ -741,7 +737,6 @@ export default async function Handler(
           );
         res.redirect("/ConfirmSlot");
       }
-      res.redirect("/ConfirmSlot");
     }
   } else {
     res.redirect("/");
