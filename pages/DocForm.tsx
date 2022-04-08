@@ -48,6 +48,7 @@ export default function FormDoc() {
           </button>
         </form>
       </div>
+      <br />
       <Link href="/DocAddingSlot" passHref={true}>
         <button className="btn btn-primary">
           <a>
