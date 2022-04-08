@@ -31,6 +31,12 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
 
   const stringifyResult = JSON.stringify(filterdbPatient);
 
+  const idDoc = await mongodb
+  .db()
+  .collection("Doctors")
+  .find({ email: mailUserAuth0 })
+  .toArray();
+
   return {
     props: {
       data: stringifyResult,
@@ -63,8 +69,12 @@ export default function PatientProfile({ data, idSlot }: any) {
           Email address : {result[0].email}
         </ul>
         <h4>Next appointments</h4>
-        {/* {() => {if(result[0].Appointments){ */}
-        {result[0].Appointments.map((appointment: any, index: any) => {
+        {result[0].Appointments ===[] || result[0].Appointments === undefined || result[0].Appointments === null ?
+
+         <><h3> You do not have any appointments planned </h3><h4> Go to home page to book an appointment </h4></>
+
+         :
+        result[0].Appointments.map((appointment: any, index: any) => {
           return (
             <div key={index}>
               <ul>
@@ -87,6 +97,9 @@ export default function PatientProfile({ data, idSlot }: any) {
             </div>
           );
         })}
+
+
+
 
         <form method="POST" action="/">
           <button className="btn btn-primary" type="submit" id="Home">

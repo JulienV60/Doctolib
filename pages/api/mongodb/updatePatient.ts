@@ -45,6 +45,7 @@ export default async function Handler(
     const cityDoc = searchforInputrdv?.city;
     const specialityDoc = searchforInputrdv?.speciality;
     const mailDoc = searchforInputrdv?.email;
+    const idDoc = searchforInputrdv?._id;
 
     const findDateObject = searchforInputrdv?.Slot.filter((date: any) => {
       return (
@@ -121,6 +122,8 @@ export default async function Handler(
                   speciality: specialityDoc,
                   date: appointmentDate,
                   slot: patientSlot,
+                  email: mailDoc,
+                  idDoc : idDoc,
                 },
               },
             }
@@ -175,6 +178,8 @@ export default async function Handler(
                   speciality: specialityDoc,
                   date: appointmentDate,
                   slot: patientSlot,
+                  email: mailDoc,
+                  idDoc : idDoc,
                 },
               },
             }
@@ -228,6 +233,8 @@ export default async function Handler(
                   speciality: specialityDoc,
                   date: appointmentDate,
                   slot: patientSlot,
+                  email: mailDoc,
+                  idDoc : idDoc,
                 },
               },
             }
@@ -281,6 +288,8 @@ export default async function Handler(
                   speciality: specialityDoc,
                   date: appointmentDate,
                   slot: patientSlot,
+                  email: mailDoc,
+                  idDoc : idDoc,
                 },
               },
             }
@@ -334,6 +343,8 @@ export default async function Handler(
                   speciality: specialityDoc,
                   date: appointmentDate,
                   slot: patientSlot,
+                  email: mailDoc,
+                  idDoc : idDoc,
                 },
               },
             }
@@ -387,6 +398,8 @@ export default async function Handler(
                   speciality: specialityDoc,
                   date: appointmentDate,
                   slot: patientSlot,
+                  email: mailDoc,
+                  idDoc : idDoc,
                 },
               },
             }
@@ -443,6 +456,8 @@ export default async function Handler(
                   speciality: specialityDoc,
                   date: appointmentDate,
                   slot: patientSlot,
+                  email: mailDoc,
+                  idDoc : idDoc,
                 },
               },
             }
@@ -497,6 +512,8 @@ export default async function Handler(
                   speciality: specialityDoc,
                   date: appointmentDate,
                   slot: patientSlot,
+                  email: mailDoc,
+                  idDoc : idDoc,
                 },
               },
             }
@@ -550,6 +567,8 @@ export default async function Handler(
                   speciality: specialityDoc,
                   date: appointmentDate,
                   slot: patientSlot,
+                  email: mailDoc,
+                  idDoc : idDoc,
                 },
               },
             }
@@ -603,6 +622,8 @@ export default async function Handler(
                   speciality: specialityDoc,
                   date: appointmentDate,
                   slot: patientSlot,
+                  email: mailDoc,
+                  idDoc : idDoc,
                 },
               },
             }
@@ -656,6 +677,8 @@ export default async function Handler(
                   speciality: specialityDoc,
                   date: appointmentDate,
                   slot: patientSlot,
+                  email: mailDoc,
+                  idDoc : idDoc,
                 },
               },
             }
@@ -710,6 +733,8 @@ export default async function Handler(
                   speciality: specialityDoc,
                   date: appointmentDate,
                   slot: patientSlot,
+                  email: mailDoc,
+                  idDoc : idDoc,
                 },
               },
             }
