@@ -56,9 +56,17 @@ a {
 
 .ConfirmSlot {
   text-align: center;
+}
 
 .divPleaseLogin {
   margin: auto;
   padding: 10rem;
-
+}
+.form-group {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-top: 15rem;
 }

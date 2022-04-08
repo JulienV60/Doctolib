@@ -32,10 +32,10 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
   const stringifyResult = JSON.stringify(filterdbPatient);
 
   const idDoc = await mongodb
-  .db()
-  .collection("Doctors")
-  .find({ email: mailUserAuth0 })
-  .toArray();
+    .db()
+    .collection("Doctors")
+    .find({ email: mailUserAuth0 })
+    .toArray();
 
   return {
     props: {
@@ -69,39 +69,40 @@ export default function PatientProfile({ data, idSlot }: any) {
           Email address : {result[0].email}
         </ul>
         <h4>Next appointments</h4>
-        {result[0].Appointments ===[] || result[0].Appointments === undefined || result[0].Appointments === null ?
+        {result[0].Appointments === [] ||
+        result[0].Appointments === undefined ||
+        result[0].Appointments === null ? (
+          <>
+            <h3> You do not have any appointments planned </h3>
+            <h4> Go to home page to book an appointment </h4>
+          </>
+        ) : (
+          result[0].Appointments.map((appointment: any, index: any) => {
+            return (
+              <div key={index}>
+                <ul>
+                  Name :{" "}
+                  {`${appointment.category} ${appointment.firstName} ${appointment.lastName} `}
+                  <br></br>
+                  Speciality : {appointment.speciality}
+                  <br></br>
+                  Date : {appointment.date} <br></br>
+                  Time : {appointment.slot} <br></br>
+                  <form
+                    method="POST"
+                    action={`/api/mongodb/cancelAppointment?id=${appointment.id}`}
+                  >
+                    <button className="btn btn-primary">
+                      Cancel appointment
+                    </button>
+                  </form>
+                </ul>
+              </div>
+            );
+          })
+        )}
 
-         <><h3> You do not have any appointments planned </h3><h4> Go to home page to book an appointment </h4></>
-
-         :
-        result[0].Appointments.map((appointment: any, index: any) => {
-          return (
-            <div key={index}>
-              <ul>
-                Name :{" "}
-                {`${appointment.category} ${appointment.firstName} ${appointment.lastName} `}
-                <br></br>
-                Speciality : {appointment.speciality}
-                <br></br>
-                Date : {appointment.date} <br></br>
-                Time : {appointment.slot} <br></br>
-                <form
-                  method="POST"
-                  action={`/api/mongodb/cancelAppointment?id=${appointment.id}`}
-                >
-                  <button className="btn btn-primary">
-                    Cancel appointment
-                  </button>
-                </form>
-              </ul>
-            </div>
-          );
-        })}
-
-
-
-
-        <form method="POST" action="/">
+        <form method="GET" action="/">
           <button className="btn btn-primary" type="submit" id="Home">
             <a> Back to home page </a>
           </button>
