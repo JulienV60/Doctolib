@@ -12,7 +12,6 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
   const SplitSlot = searchIdRdvButton.split(",");
   const idSlot = SplitSlot[0];
 
-
   const auth0searchUser = await fetch(
     `https://${process.env.AUTH0_DOMAIN}/userinfo`,
     {
@@ -50,7 +49,6 @@ export default function PatientProfile({ data, idSlot }: any) {
     );
   }
 
-
   if (result.find((element: any) => element.Appointments !== undefined)) {
     return (
       <div>
@@ -83,7 +81,7 @@ export default function PatientProfile({ data, idSlot }: any) {
           })}
 
           <form method="POST" action="/">
-            <button type="submit" id="test2">
+            <button type="submit" className="btn btn-primary" id="test2">
               <a> Back to home page </a>
             </button>
           </form>
@@ -118,44 +116,49 @@ export default function PatientProfile({ data, idSlot }: any) {
   return (
     <div>
       <Layout>
-          <h3>My details</h3>
-            <ul>
-              First name : {result[0].firstName}<br></br>
-              Last name : {result[0].lastName}<br></br>
-              Phone number : {result[0].phone}<br></br>
-              Email address : {result[0].email}
-            </ul>
-            <h4>Next appointments</h4>
-            {/* {() => {if(result[0].Appointments){ */}
-                {result[0].Appointments.map(
-                  (appointment: any, index: any) => {
-                    return <div key={index}>
-                      <ul>
-                      Name : {`${appointment.category} ${appointment.firstName} ${appointment.lastName} `}<br></br>
-                      Speciality : {appointment.speciality}<br></br>
-                      Date : {appointment.date} <br></br>
-                      Time : {appointment.slot} <br></br>
-                      <form method="POST" action={`/api/mongodb/cancelAppointment?id=${appointment.id}`}>
-                        <button>
-                          Cancel appointment
-                        </button>
-                      </form>
-                      </ul>
-                      </div>
-                  }
-                )}
-            {/* }else{
+        <h3>My details</h3>
+        <ul>
+          First name : {result[0].firstName}
+          <br></br>
+          Last name : {result[0].lastName}
+          <br></br>
+          Phone number : {result[0].phone}
+          <br></br>
+          Email address : {result[0].email}
+        </ul>
+        <h4>Next appointments</h4>
+        {/* {() => {if(result[0].Appointments){ */}
+        {result[0].Appointments.map((appointment: any, index: any) => {
+          return (
+            <div key={index}>
+              <ul>
+                Name :{" "}
+                {`${appointment.category} ${appointment.firstName} ${appointment.lastName} `}
+                <br></br>
+                Speciality : {appointment.speciality}
+                <br></br>
+                Date : {appointment.date} <br></br>
+                Time : {appointment.slot} <br></br>
+                <form
+                  method="POST"
+                  action={`/api/mongodb/cancelAppointment?id=${appointment.id}`}
+                >
+                  <button>Cancel appointment</button>
+                </form>
+              </ul>
+            </div>
+          );
+        })}
+        {/* }else{
               <p>You do not have any appointments</p>
             }}} */}
 
-
-            <form method="POST" action="/">
-            <button type="submit" id="Home">
+        <form method="POST" action="/">
+          <button type="submit" id="Home">
             <a> Back to home page </a>
           </button>
-            </form>
+        </form>
       </Layout>
     </div>
   );
-
 }

@@ -88,7 +88,7 @@ const GiveAvailableSlots = (props: any) => {
               selectedTimeSlot
             )}`}
           >
-            <button>Confirm ur slot</button>
+            <button className="btn btn-primary">Confirm ur slot</button>
           </form>
         </div>
       ) : null}

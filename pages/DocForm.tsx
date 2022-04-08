@@ -3,14 +3,15 @@ import React, { useState } from "react";
 import Link from "next/link";
 import { MultiSelect } from "react-multi-select-component";
 import { Form, Button } from "react-bootstrap";
-
+import DateRangeIcon from "@mui/icons-material/DateRange";
+import ViewAgendaIcon from "@mui/icons-material/ViewAgenda";
 export default function FormDoc() {
   return (
     <Layout>
-      <div>
+      <div className="form-group">
         <form method="POST" action="/api/mongodb/addDoc">
           <input
-            className=".form-control"
+            className="form-control"
             id="firstName"
             type="text"
             placeholder="First Name"
@@ -18,7 +19,7 @@ export default function FormDoc() {
           ></input>
 
           <input
-            className=".form-control"
+            className="form-control"
             id="lastName"
             type="text"
             placeholder="Last Name"
@@ -26,7 +27,7 @@ export default function FormDoc() {
           ></input>
 
           <input
-            className=".form-control"
+            className="form-control"
             id="city"
             type="text"
             placeholder="city"
@@ -34,73 +35,34 @@ export default function FormDoc() {
           ></input>
 
           <input
-            className=".form-control"
+            className="form-control"
             id="speciality"
             type="text"
             placeholder="Speciality"
             name="speciality"
           ></input>
 
-          <button type="submit" id="test2">
+          <button type="submit" className="btn btn-primary" id="test2">
             <a> Send</a>
           </button>
         </form>
-        <Form>
-          <Form.Group className="mb-3" controlId="formBasicEmail">
-            <Form.Label>First Name</Form.Label>
-            <Form.Control
-              className=".form-control"
-              id="firstName"
-              type="text"
-              placeholder="First Name"
-              name="firstName"
-            />
-          </Form.Group>
-
-          <Form.Group className="mb-3" controlId="formBasicPassword">
-            <Form.Label>Last Name</Form.Label>
-            <Form.Control
-              className=".form-control"
-              id="lastName"
-              type="text"
-              placeholder="Last Name"
-              name="lastName"
-            />
-          </Form.Group>
-
-          <Form.Group className="mb-3" controlId="formBasicPassword">
-            <Form.Label>City</Form.Label>
-            <Form.Control
-              className=".form-control"
-              id="city"
-              type="text"
-              placeholder="city"
-              name="city"
-            />
-          </Form.Group>
-
-          <Form.Group className="mb-3" controlId="formBasicPassword">
-            <Form.Label>Speciality</Form.Label>
-            <Form.Control
-              className=".form-control"
-              id="speciality"
-              type="text"
-              placeholder="Speciality"
-              name="speciality"
-            />
-          </Form.Group>
-        </Form>
-        <Link href="/DocAddingSlot" passHref={true}>
-          <button>
-            <a>Add Availability</a>
-          </button>
-        </Link>
-        <Link href="/DocPlanning" passHref={true}>
-          <button>
-            <a>My Agenda</a>
-          </button>
-        </Link>
       </div>
+      <Link href="/DocAddingSlot" passHref={true}>
+        <button className="btn btn-primary">
+          <a>
+            <DateRangeIcon />
+            Calendar
+          </a>
+        </button>
+      </Link>
+      <Link href="/DocPlanning" passHref={true}>
+        <button className="btn btn-primary">
+          <a>
+            <ViewAgendaIcon />
+            Agenda
+          </a>
+        </button>
+      </Link>
     </Layout>
   );
 }

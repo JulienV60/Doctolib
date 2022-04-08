@@ -1,9 +1,11 @@
 import Head from "next/head";
 import React from "react";
 import Link from "next/link";
-import { cp } from "fs/promises";
 import Image from "next/image";
-
+import AccountCircle from "@mui/icons-material/AccountCircle";
+import LoginIcon from "@mui/icons-material/Login";
+import LogoutIcon from "@mui/icons-material/Logout";
+import HealthAndSafetyIcon from "@mui/icons-material/HealthAndSafety";
 const Layout: React.FC = ({ children }: any) => {
   const [cookiePatient, setCookie] = React.useState<any>("");
 
@@ -58,14 +60,17 @@ const Layout: React.FC = ({ children }: any) => {
         </div>
         <nav className="navbar navbar-expand-lg navbar-primary bg-primary">
           <div className="container-fluid">
-            <Link href="/">
+            <Link href="/" passHref={true}>
               {/* <a className="navbar-brand user-select-none">Doctolib</a> */}
-              <Image
-                src="/logoDoctolib.png"
-                width={120}
-                height={50}
-                alt="logoDoctolib"
-              />
+              <button className="btn btn-outline-white my-2 my-sm-0">
+                <Image
+                  src="/logoDoctolib.png"
+                  width={120}
+                  height={50}
+                  alt="logoDoctolib"
+                  style={{ borderRadius: "10px" }}
+                />
+              </button>
             </Link>
 
             <button
@@ -91,7 +96,9 @@ const Layout: React.FC = ({ children }: any) => {
                     className="btn btn-outline-white my-2 my-sm-0"
                     type="submit"
                   >
-                    <a>Login as Patient</a>
+                    <a>
+                      <LoginIcon />
+                    </a>
                   </button>
                 </Link>
               ) : (
@@ -101,7 +108,9 @@ const Layout: React.FC = ({ children }: any) => {
                       className="btn btn-outline-white my-2 my-sm-0"
                       type="submit"
                     >
-                      <a>Logout</a>
+                      <a>
+                        <LogoutIcon />
+                      </a>
                     </button>
                   </Link>
                   <Link href="/PatientProfile" passHref={true}>
@@ -109,7 +118,10 @@ const Layout: React.FC = ({ children }: any) => {
                       className="btn btn-outline-white my-2 my-sm-0"
                       type="submit"
                     >
-                      <a>My Profile</a>
+                      <a>
+                        {" "}
+                        <AccountCircle />
+                      </a>
                     </button>
                   </Link>
                 </div>
@@ -123,25 +135,32 @@ const Layout: React.FC = ({ children }: any) => {
                     type="submit"
                     id="LogDoc"
                   >
-                    <a>Are you a Doctor ? </a>
+                    <a>
+                      <HealthAndSafetyIcon />
+                    </a>
                   </button>
                 </Link>
               ) : (
                 <div>
-                  <Link href="/api/auth/logoutDoc" passHref={true}>
-                    <button
-                      className="btn btn-outline-white my-2 my-sm-0"
-                      type="submit"
-                    >
-                      <a>Logout</a>
-                    </button>
-                  </Link>
                   <Link href="/" passHref={true}>
                     <button
                       className="btn btn-outline-white my-2 my-sm-0"
                       type="submit"
                     >
-                      <a>My Profile</a>
+                      <a>
+                        <AccountCircle />
+                      </a>
+                    </button>
+                  </Link>
+                  <Link href="/api/auth/logoutDoc" passHref={true}>
+                    <button
+                      className="btn btn-outline-white my-2 my-sm-0"
+                      type="submit"
+                    >
+                      <a>
+                        {" "}
+                        <LogoutIcon />
+                      </a>
                     </button>
                   </Link>
                 </div>
