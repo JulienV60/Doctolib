@@ -11,6 +11,11 @@ const MyAgenda = () => {
         <div className="App">
           <hr className="k-my-8" />
           <App />
+          <Link href="/DocForm" passHref={true}>
+            <button className="btn btn-primary">
+              <a>Form Doctor</a>
+            </button>
+          </Link>
         </div>
       </div>
     </Layout>
