@@ -1,7 +1,6 @@
 import Layout from "../components/Layout";
 import React, { useState } from "react";
-
-import Link from "next/link";
+import { useRouter } from "next/router";
 import { getCookies } from "cookies-next";
 import { GetServerSideProps } from "next";
 import { getDatabase } from "../src/database";
@@ -9,48 +8,57 @@ import { getDatabase } from "../src/database";
 export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
   const mongodb = await getDatabase();
   const cookies = { cookie: getCookies({ req, res }) };
-  const AccessTokenPatient = cookies.cookie.AccessTokenPatient;
+
   const searchIdRdvButton = cookies.cookie.Slot;
-  const SplitSlot = searchIdRdvButton.split(",");
-  const idSlot = SplitSlot[0];
-  console.log("testidslot1", idSlot);
+  if (
+    searchIdRdvButton === null ||
+    searchIdRdvButton === undefined ||
+    searchIdRdvButton === "undefined"
+  ) {
+    return {
+      props: { data: null, idSlot: null },
+    };
+  } else {
+    const AccessTokenPatient = cookies.cookie.AccessTokenPatient;
+    const SplitSlot = searchIdRdvButton.split(",");
+    const idSlot = SplitSlot[0];
 
-  const auth0searchUser = await fetch(
-    `https://${process.env.AUTH0_DOMAIN}/userinfo`,
-    {
-      method: "Post",
-      headers: {
-        Authorization: `Bearer ${AccessTokenPatient}`,
+    const auth0searchUser = await fetch(
+      `https://${process.env.AUTH0_DOMAIN}/userinfo`,
+      {
+        method: "Post",
+        headers: {
+          Authorization: `Bearer ${AccessTokenPatient}`,
+        },
+      }
+    ).then((data) => data.json());
+
+    const mailUserAuth0 = auth0searchUser.email;
+    const filterdbPatient = await mongodb
+      .db()
+      .collection("Patients")
+      .find({ email: mailUserAuth0 })
+      .toArray();
+
+    const stringifyResult = JSON.stringify(filterdbPatient);
+    // const stringifyIdSlot = JSON.stringify(idSlot);
+    return {
+      props: {
+        data: stringifyResult,
+        idSlot: idSlot,
       },
-    }
-  ).then((data) => data.json());
-
-  const mailUserAuth0 = auth0searchUser.email;
-  const filterdbPatient = await mongodb
-    .db()
-    .collection("Patients")
-    .find({ email: mailUserAuth0 })
-    .toArray();
-
-  const stringifyResult = JSON.stringify(filterdbPatient);
-  // const stringifyIdSlot = JSON.stringify(idSlot);
-  return {
-    props: {
-      data: stringifyResult,
-      idSlot: idSlot,
-    },
-  };
+    };
+  }
 };
 
-export default function formPatient({ data, idSlot }: any) {
+export default function FormPatient({ data, idSlot }: any) {
   const result = JSON.parse(data);
-  console.log("test result", result);
-
-  // const findAppointment = result[0].Appointments.filter(
-  //   (appointment: any) => {
-  //     return appointment.id.toString() === idSlot;
-  //   }
-  // )
+  const router = useRouter();
+  React.useEffect(() => {
+    if (idSlot === null) {
+      router.reload();
+    }
+  }, []);
 
   return (
     <Layout>

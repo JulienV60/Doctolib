@@ -37,7 +37,6 @@ export default async function handler(
     }),
   ]);
   const Slot = req.query.state;
-
   if (Slot == undefined || Slot == "undefined") {
     res.redirect("/");
   } else {

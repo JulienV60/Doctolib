@@ -17,8 +17,8 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
 };
 export default function pleaseLogin({ data, cookie }: any) {
   const Slot = JSON.parse(cookie);
-
   return (
+
     <Layout>
       <div className="divPleaseLogin">
         <h4>You are not logged in, please log in.</h4>
@@ -36,5 +36,6 @@ export default function pleaseLogin({ data, cookie }: any) {
       </form> */}
       </div>
     </Layout>
+
   );
 }

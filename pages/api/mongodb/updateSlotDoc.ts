@@ -2,10 +2,6 @@ import { getCookies } from "cookies-next";
 import { ObjectId } from "mongodb";
 import type { NextApiRequest, NextApiResponse } from "next";
 import { getDatabase } from "../../../src/database";
-
-import { debugPort } from "process";
-import { useWorkHours } from "@progress/kendo-react-scheduler/dist/npm/hooks";
-
 export default async function Handler(
   req: NextApiRequest,
   res: NextApiResponse
