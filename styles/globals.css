@@ -17,30 +17,44 @@ a {
 
 .Container {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
+}
+
+.Container .btn {
+  background-color: rgb(198, 188, 188);
+}
+
+.btn:hover {
+  background-color: #5391c4;
 }
 
 .Element {
-  margin-top: 2rem;
-  display: flex;
-  background-color: #0d6efd;
+  margin-top: 1rem;
+
+  flex-wrap: wrap;
+
   border: solid;
 
   border-radius: 2em 2em 2em 2em;
-  box-shadow: 1rem 1rem 1rem 1rem;
 }
 
 .Doctor {
-  background-color: rgb(210, 240, 249);
-  border: solid;
+  /* background-color: rgb(210, 240, 249); */
+  /* border: solid; */
   border-radius: 1em 1em 1em 1em;
   display: flex;
   margin-top: 1rem;
-  padding-top: 2rem;
+  padding-top: 1rem;
   padding-left: 1rem;
   padding-right: 1rem;
   align-items: flex-start;
+  text-align: center;
 }
 .Unknow {
   margin: 2rem;
+}
+
+.divPleaseLogin {
+  margin: auto;
+  padding: 10rem;
 }
