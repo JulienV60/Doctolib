@@ -22,10 +22,10 @@ export default function pleaseLogin({ data, cookie }: any) {
       <div className="divPleaseLogin">
         <h4>You are not logged in, please log in.</h4>
 
-        <button>
+        <button className="btn btn-primary" type="submit">
           <Link href={`/api/auth/login?slot=${Slot}`}>
             <a>
-              Login as a Patient &nbsp; &nbsp;
+              Login as a Patient
               <LoginIcon />
             </a>
           </Link>

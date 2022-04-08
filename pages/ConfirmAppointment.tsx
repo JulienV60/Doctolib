@@ -48,7 +48,7 @@ export default function ConfirmAppointment({ data, idSlot }: any) {
   });
 
   return (
-    <div>
+    <div className="ConfirmSlot" style={{ lineHeight: "3rem" }}>
       <Layout>
         <h2>✅ Appointment confirmed</h2>
         <h3>Patient details</h3>

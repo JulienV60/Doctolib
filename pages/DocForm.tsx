@@ -8,8 +8,9 @@ import ViewAgendaIcon from "@mui/icons-material/ViewAgenda";
 export default function FormDoc() {
   return (
     <Layout>
-      <div className="form-group">
+      <div className="form-group" style={{ paddingTop: "0rem" }}>
         <form method="POST" action="/api/mongodb/addDoc">
+          <h1>Who are you ? </h1>
           <input
             className="form-control"
             id="firstName"
